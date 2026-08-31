@@ -214,3 +214,90 @@ footer {
         font-size: 2rem;
     }
 }
+
+
+/* --------------------------
+   Research Projects
+--------------------------- */
+
+.research-project {
+    margin-top: 36px;
+    margin-bottom: 45px;
+}
+
+.project-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 5px;
+}
+
+.project-heading h3 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.project-heading h3 a {
+    text-decoration: none;
+}
+
+.project-heading h3 a:hover {
+    text-decoration: underline;
+}
+
+.project-date {
+    white-space: nowrap;
+    color: #555;
+    font-size: 0.92rem;
+}
+
+.project-affiliation {
+    margin-top: 7px;
+    margin-bottom: 13px;
+    color: #555;
+    font-size: 0.93rem;
+}
+
+.project-affiliation a {
+    text-decoration: none;
+}
+
+.project-affiliation a:hover {
+    text-decoration: underline;
+}
+
+.project-school {
+    float: right;
+}
+
+.research-project ul {
+    margin-top: 12px;
+    padding-left: 25px;
+}
+
+.research-project li {
+    margin-bottom: 8px;
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 700px) {
+
+    .project-heading {
+        display: block;
+    }
+
+    .project-date {
+        display: block;
+        margin-top: 6px;
+    }
+
+    .project-school {
+        display: block;
+        float: none;
+        margin-top: 3px;
+    }
+}
