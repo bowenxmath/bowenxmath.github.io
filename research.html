@@ -7,8 +7,12 @@
 
     <title>Research | Bowen Xie</title>
 
+    <meta name="description"
+          content="Research of Bowen Xie in applied probability, stochastic control, queueing theory, stochastic networks, optimization, and mathematical finance.">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 
 <body>
 
@@ -24,7 +28,10 @@
             <a href="research.html">Research</a>
             <a href="teaching.html">Teaching</a>
             <a href="education.html">Education</a>
-            <a href="assets/files/Bowen_Xie_CV.pdf">CV</a>
+            <a href="assets/files/Bowen_Xie_CV.pdf"
+               target="_blank">
+                CV
+            </a>
         </nav>
 
     </div>
@@ -34,6 +41,11 @@
 <main class="container">
 
     <h1>Research</h1>
+
+
+    <!-- ==========================================
+         Research Overview
+    =========================================== -->
 
     <section>
 
@@ -56,67 +68,100 @@
     </section>
 
 
-    <section>
-
-        <h2>Publications</h2>
-
-        <ol class="publications">
-
-            <li>
-                <strong>Bowen Xie and Yijin Gao.</strong>
-                Diffusion approximation of a special bandwidth
-                sharing model via infinitesimal generators with
-                a lifting-projection method.
-                <em>Operations Research Letters</em>, 2024.
-            </li>
-
-            <li>
-                <strong>Bowen Xie.</strong>
-                Multi-component matching queues in heavy traffic.
-                <em>Queueing Systems</em>, 2024.
-            </li>
-
-        </ol>
-
-    </section>
-
-
-    <section>
-
-        <h2>Preprints and Working Papers</h2>
-
-        <ol class="publications">
-
-            <li>
-                Add working paper here.
-            </li>
-
-        </ol>
-
-    </section>
-
+    <!-- ==========================================
+         Current Research Projects
+    =========================================== -->
 
     <section>
 
         <h2>Current Research Projects</h2>
 
+
         <h3>Queueing Systems and Heavy Traffic</h3>
 
         <p>
-            Description of your current work.
+            My research in queueing theory focuses on stochastic
+            systems in heavy-traffic regimes, including matching
+            queues, queues with abandonment, admission control,
+            and diffusion approximations.
         </p>
+
+
+        <h3>Stochastic Control and Optimization</h3>
+
+        <p>
+            I study stochastic control problems arising in queueing
+            systems, operations research, and other stochastic
+            dynamical systems. My work uses techniques from
+            diffusion control, Hamilton&ndash;Jacobi&ndash;Bellman
+            equations, and asymptotic analysis.
+        </p>
+
 
         <h3>Limit Order Books and Market Making</h3>
 
         <p>
-            Description of your current work.
+            I am interested in stochastic models for limit order
+            books and market-making problems, including the
+            development of tractable stochastic models and
+            associated control and optimization problems.
         </p>
 
-        <h3>Stochastic Control and Reinforcement Learning</h3>
+
+        <h3>Data-Driven Stochastic Modeling</h3>
 
         <p>
-            Description of your current work.
+            I am also interested in combining stochastic-process
+            models with data-driven methods, including applications
+            of machine learning and reinforcement learning to
+            stochastic systems.
         </p>
+
+    </section>
+
+
+    <!-- ==========================================
+         Publications
+         Loaded automatically from publications.bib
+    =========================================== -->
+
+    <section>
+
+        <h2>Publications</h2>
+
+        <ol id="published-list" class="publications">
+            <li>Loading publications...</li>
+        </ol>
+
+    </section>
+
+
+    <!-- ==========================================
+         Preprints and Working Papers
+    =========================================== -->
+
+    <section>
+
+        <h2>Preprints and Working Papers</h2>
+
+        <ol id="preprint-list" class="publications">
+            <li>Loading preprints and working papers...</li>
+        </ol>
+
+    </section>
+
+
+    <!-- ==========================================
+         Theses
+    =========================================== -->
+
+    <section>
+
+        <h2>Theses</h2>
+
+        <ol id="thesis-list" class="publications">
+            <li>Loading theses...</li>
+        </ol>
 
     </section>
 
@@ -126,10 +171,28 @@
 <footer>
 
     <div class="container">
-        © 2026 Bowen Xie · The University of Akron
+        &copy; 2026 Bowen Xie &middot;
+        Department of Mathematics &middot;
+        The University of Akron
     </div>
 
 </footer>
 
+
+<!-- ==========================================
+     BibTeX parser
+=========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bibtex-parse-js@0.0.24/bibtexParse.js"></script>
+
+
+<!-- ==========================================
+     Publication loader
+=========================================== -->
+
+<script src="assets/js/publications.js"></script>
+
+
 </body>
+
 </html>
