@@ -13,14 +13,15 @@
     --muted-light: #999999;
 
     --header-bg: #ffffff;
-    --soft-bg: #f7f7f7;
+    --soft-bg: #f6f6f6;
 
-    --border: #eeeeee;
+    --border: #e7e7e7;
 
     --link: #0066cc;
     --link-hover: #004c99;
 
-    --search-bg: #ffffff;
+    --control-bg: #f5f5f5;
+    --control-border: #dddddd;
 }
 
 
@@ -48,13 +49,14 @@
         --link: #70b7ff;
         --link-hover: #a2d0ff;
 
-        --search-bg: #202020;
+        --control-bg: #252525;
+        --control-border: #444444;
     }
 }
 
 
 /* =========================================================
-   Manual Light Mode
+   Manual Light Theme
 ========================================================= */
 
 html[data-theme="light"] {
@@ -68,19 +70,20 @@ html[data-theme="light"] {
     --muted-light: #999999;
 
     --header-bg: #ffffff;
-    --soft-bg: #f7f7f7;
+    --soft-bg: #f6f6f6;
 
-    --border: #eeeeee;
+    --border: #e7e7e7;
 
     --link: #0066cc;
     --link-hover: #004c99;
 
-    --search-bg: #ffffff;
+    --control-bg: #f5f5f5;
+    --control-border: #dddddd;
 }
 
 
 /* =========================================================
-   Manual Dark Mode
+   Manual Dark Theme
 ========================================================= */
 
 html[data-theme="dark"] {
@@ -101,7 +104,8 @@ html[data-theme="dark"] {
     --link: #70b7ff;
     --link-hover: #a2d0ff;
 
-    --search-bg: #202020;
+    --control-bg: #252525;
+    --control-border: #444444;
 }
 
 
@@ -166,9 +170,11 @@ a:hover {
 
 header {
     background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
 
-    border-bottom:
-        1px solid var(--border);
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .nav-container {
@@ -197,7 +203,7 @@ nav {
     display: flex;
     align-items: center;
 
-    gap: 22px;
+    gap: 20px;
 }
 
 nav a {
@@ -211,166 +217,74 @@ nav a {
 
 nav a:hover {
     color: var(--link);
-
     text-decoration: none;
 }
 
 
 /* =========================================================
-   Navigation Icon Buttons
+   Theme Button
 ========================================================= */
 
-.nav-control {
-    position: relative;
-
+.theme-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     flex: 0 0 auto;
 
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
 
-    margin: 0;
+    margin-left: 2px;
     padding: 0;
 
-    border: 0;
+    border: 1px solid var(--control-border);
+    border-radius: 7px;
 
     color: var(--muted);
-    background: transparent;
+    background: var(--control-bg);
 
     cursor: pointer;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 18px;
+    line-height: 1;
+
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
 }
 
-.nav-control:hover {
+.theme-button:hover {
     color: var(--heading);
+    background: var(--bg);
+    border-color: var(--muted-light);
+
+    transform: translateY(-1px);
 }
 
-.nav-control:focus {
+.theme-button:active {
+    transform: translateY(0);
+}
+
+.theme-button:focus {
     outline: none;
 }
 
-.nav-control:focus-visible {
-    outline: 1px solid var(--link);
-    outline-offset: 3px;
+.theme-button:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
 }
 
 
 /* =========================================================
-   CSS Search Icon
-========================================================= */
-
-.search-button::before {
-    content: "";
-
-    position: absolute;
-
-    width: 11px;
-    height: 11px;
-
-    border: 1.6px solid currentColor;
-    border-radius: 50%;
-
-    left: 6px;
-    top: 5px;
-}
-
-.search-button::after {
-    content: "";
-
-    position: absolute;
-
-    width: 7px;
-    height: 1.6px;
-
-    background: currentColor;
-
-    transform: rotate(45deg);
-
-    left: 16px;
-    top: 17px;
-
-    border-radius: 1px;
-}
-
-
-/* =========================================================
-   CSS Moon Icon
-========================================================= */
-
-.theme-button::before {
-    content: "";
-
-    position: absolute;
-
-    width: 14px;
-    height: 14px;
-
-    border: 1.6px solid currentColor;
-    border-radius: 50%;
-
-    left: 6px;
-    top: 6px;
-}
-
-.theme-button::after {
-    content: "";
-
-    position: absolute;
-
-    width: 11px;
-    height: 11px;
-
-    border-radius: 50%;
-
-    background: var(--header-bg);
-
-    left: 10px;
-    top: 3px;
-}
-
-
-/* =========================================================
-   Sun Icon in Dark Mode
-========================================================= */
-
-html[data-effective-theme="dark"] .theme-button::before {
-    width: 10px;
-    height: 10px;
-
-    left: 9px;
-    top: 9px;
-
-    border: 1.6px solid currentColor;
-    border-radius: 50%;
-}
-
-html[data-effective-theme="dark"] .theme-button::after {
-    width: 18px;
-    height: 18px;
-
-    left: 5px;
-    top: 5px;
-
-    background: transparent;
-
-    border-radius: 0;
-
-    box-shadow:
-        0 -8px 0 -7px currentColor,
-        0 8px 0 -7px currentColor,
-        8px 0 0 -7px currentColor,
-        -8px 0 0 -7px currentColor,
-        6px 6px 0 -7px currentColor,
-        -6px -6px 0 -7px currentColor,
-        6px -6px 0 -7px currentColor,
-        -6px 6px 0 -7px currentColor;
-}
-
-
-/* =========================================================
-   Main
+   Main Content
 ========================================================= */
 
 main {
@@ -435,8 +349,7 @@ h3 {
 .hero {
     display: grid;
 
-    grid-template-columns:
-        220px 1fr;
+    grid-template-columns: 220px 1fr;
 
     gap: 40px;
 
@@ -488,6 +401,10 @@ h3 {
     text-decoration: none;
 }
 
+.directory-link:hover {
+    text-decoration: underline;
+}
+
 
 /* =========================================================
    Homepage External Links
@@ -509,6 +426,10 @@ h3 {
     text-decoration: none;
 }
 
+.links a:hover {
+    text-decoration: underline;
+}
+
 
 /* =========================================================
    Biography
@@ -525,6 +446,10 @@ h3 {
     margin-bottom: 18px;
 }
 
+.biography p:last-child {
+    margin-bottom: 0;
+}
+
 
 /* =========================================================
    Prospective Students
@@ -535,8 +460,7 @@ h3 {
 
     background: var(--soft-bg);
 
-    border-left:
-        3px solid var(--link);
+    border-left: 3px solid var(--link);
 }
 
 .notice strong {
@@ -565,7 +489,6 @@ h3 {
     padding: 0;
 
     color: var(--muted);
-
     background: none;
 
     font-size: 0.95rem;
@@ -623,10 +546,12 @@ h3 {
     margin-left: 8px;
     padding: 0;
 
-    border: 0;
+    border: none;
 
     font-size: 0.88rem;
     font-weight: 500;
+
+    line-height: inherit;
 
     text-decoration: none;
 }
@@ -638,7 +563,7 @@ h3 {
 
 
 /* =========================================================
-   Research Projects
+   Selected Research Projects
 ========================================================= */
 
 .research-project {
@@ -668,6 +593,12 @@ h3 {
     text-decoration: none;
 }
 
+.project-heading h3 a:hover {
+    color: var(--link);
+
+    text-decoration: underline;
+}
+
 .project-date {
     white-space: nowrap;
 
@@ -683,6 +614,16 @@ h3 {
     color: var(--muted);
 
     font-size: 0.88rem;
+}
+
+.project-affiliation a {
+    color: var(--link);
+
+    text-decoration: none;
+}
+
+.project-affiliation a:hover {
+    text-decoration: underline;
 }
 
 .project-school {
@@ -701,7 +642,7 @@ h3 {
 
 
 /* =========================================================
-   General Lists
+   Teaching / Education Lists
 ========================================================= */
 
 main ul {
@@ -714,288 +655,14 @@ main li {
 
 
 /* =========================================================
-   Search Overlay
+   Horizontal Rules
 ========================================================= */
 
-.site-search-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 10000;
-
-    display: none;
-
-    align-items: flex-start;
-    justify-content: center;
-
-    padding-top: 90px;
-
-    background:
-        rgba(0, 0, 0, 0.28);
-
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-}
-
-.site-search-overlay.is-open {
-    display: flex;
-}
-
-
-/* =========================================================
-   Search Panel
-========================================================= */
-
-.site-search-panel {
-    width:
-        min(600px, calc(100% - 40px));
-
-    max-height: 70vh;
-
-    overflow-y: auto;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 8px;
-
-    background:
-        var(--search-bg);
-
-    box-shadow:
-        0 12px 35px
-        rgba(0, 0, 0, 0.18);
-}
-
-
-/* =========================================================
-   Search Input Row
-========================================================= */
-
-.site-search-row {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    min-height: 54px;
-
-    padding:
-        0 16px 0 46px;
-}
-
-
-/* Search icon inside modal */
-
-.site-search-row::before {
-    content: "";
-
-    position: absolute;
-
-    width: 12px;
-    height: 12px;
-
-    left: 18px;
-    top: 18px;
-
-    border:
-        1.6px solid var(--muted);
-
-    border-radius: 50%;
-}
-
-.site-search-row::after {
-    content: "";
-
-    position: absolute;
-
-    width: 7px;
-    height: 1.6px;
-
-    left: 29px;
-    top: 31px;
-
-    background:
-        var(--muted);
-
-    transform:
-        rotate(45deg);
-
-    border-radius: 1px;
-}
-
-
-/* =========================================================
-   Search Input
-========================================================= */
-
-.site-search-input {
-    flex: 1;
-
-    min-width: 0;
-    height: 52px;
-
-    margin: 0;
-    padding: 0 36px 0 0;
+hr {
+    margin: 40px 0;
 
     border: 0;
-    outline: 0;
-
-    color: var(--text);
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 1rem;
-
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-.site-search-input::placeholder {
-    color: var(--muted-light);
-}
-
-.site-search-input::-webkit-search-decoration,
-.site-search-input::-webkit-search-cancel-button,
-.site-search-input::-webkit-search-results-button,
-.site-search-input::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-}
-
-
-/* =========================================================
-   Search Close Button
-========================================================= */
-
-.site-search-close {
-    position: absolute;
-
-    right: 14px;
-    top: 13px;
-
-    width: 28px;
-    height: 28px;
-
-    padding: 0;
-
-    border: 0;
-
-    color: var(--muted);
-    background: transparent;
-
-    cursor: pointer;
-}
-
-.site-search-close::before,
-.site-search-close::after {
-    content: "";
-
-    position: absolute;
-
-    width: 15px;
-    height: 1.5px;
-
-    left: 6px;
-    top: 13px;
-
-    background: currentColor;
-
-    border-radius: 1px;
-}
-
-.site-search-close::before {
-    transform: rotate(45deg);
-}
-
-.site-search-close::after {
-    transform: rotate(-45deg);
-}
-
-.site-search-close:hover {
-    color: var(--heading);
-}
-
-
-/* =========================================================
-   Search Results
-========================================================= */
-
-.site-search-results {
-    border-top:
-        1px solid var(--border);
-}
-
-.site-search-results:empty {
-    display: none;
-}
-
-.site-search-result {
-    display: block;
-
-    padding: 12px 16px;
-
-    border-bottom:
-        1px solid var(--border);
-
-    text-decoration: none;
-}
-
-.site-search-result:last-child {
-    border-bottom: 0;
-}
-
-.site-search-result:hover {
-    background: var(--soft-bg);
-
-    text-decoration: none;
-}
-
-.site-search-result-title {
-    display: block;
-
-    color: var(--heading);
-
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.site-search-result:hover
-.site-search-result-title {
-    color: var(--link);
-}
-
-.site-search-result-page {
-    display: block;
-
-    margin-top: 1px;
-
-    color: var(--muted);
-
-    font-size: 0.78rem;
-}
-
-.site-search-result-text {
-    display: block;
-
-    margin-top: 3px;
-
-    color: var(--muted);
-
-    font-size: 0.86rem;
-    line-height: 1.5;
-}
-
-.site-search-empty {
-    padding: 16px;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
-}
-
-body.search-open {
-    overflow: hidden;
+    border-top: 1px solid var(--border);
 }
 
 
@@ -1006,8 +673,7 @@ body.search-open {
 footer {
     padding: 24px 0;
 
-    border-top:
-        1px solid var(--border);
+    border-top: 1px solid var(--border);
 
     color: var(--muted-light);
     background: var(--bg);
@@ -1093,14 +759,6 @@ footer {
     .publications {
         padding-left: 24px;
     }
-
-    .site-search-overlay {
-        padding-top: 55px;
-    }
-
-    .site-search-panel {
-        width: calc(100% - 30px);
-    }
 }
 
 
@@ -1126,6 +784,17 @@ footer {
         font-size: 0.88rem;
     }
 
+    .theme-button {
+        width: 30px;
+        height: 30px;
+
+        font-size: 17px;
+    }
+
+    main {
+        padding-top: 32px;
+    }
+
     .hero-photo {
         max-width: 200px;
     }
@@ -1139,80 +808,23 @@ footer {
         font-size: 1.22rem;
     }
 
+    .position {
+        font-size: 1rem;
+    }
+
+    .affiliation {
+        font-size: 0.95rem;
+    }
+
+    .links {
+        gap: 12px;
+    }
+
     .notice {
         padding: 16px 18px;
     }
-}
 
-
-/* =========================================================
-   Search Destination Highlighting
-========================================================= */
-
-.search-highlight {
-    padding: 0 2px;
-
-    color: #222;
-    background: #ffe58a;
-
-    border-radius: 2px;
-}
-
-
-/* Slight flash around the section reached from search */
-
-.search-target {
-    animation:
-        search-target-flash 2s ease;
-}
-
-
-@keyframes search-target-flash {
-
-    0% {
-        background:
-            rgba(255, 229, 138, 0.28);
+    .project-heading h3 {
+        font-size: 1rem;
     }
-
-    100% {
-        background:
-            transparent;
-    }
-}
-
-
-/* =========================================================
-   Dark Mode Search Highlight
-========================================================= */
-
-@media (prefers-color-scheme: dark) {
-
-    .search-highlight {
-        color: #111;
-        background: #f4d35e;
-    }
-}
-
-
-html[data-theme="dark"]
-.search-highlight {
-    color: #111;
-    background: #f4d35e;
-}
-
-
-html[data-theme="light"]
-.search-highlight {
-    color: #222;
-    background: #ffe58a;
-}
-
-
-/* =========================================================
-   Scroll Position
-========================================================= */
-
-section,
-.research-project {
-    scroll-margin-top: 90px;
 }
