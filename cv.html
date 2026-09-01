@@ -3,14 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>CV | Bowen Xie</title>
 
-    <link rel="stylesheet" href="assets/css/style.css?v=29">
+    <link rel="stylesheet"
+          href="assets/css/style.css?v=31">
 </head>
 
+
 <body>
+
+
+<!-- =========================================================
+     Header
+========================================================= -->
 
 <header>
 
@@ -43,26 +52,66 @@
 </header>
 
 
+
+<!-- =========================================================
+     Main
+========================================================= -->
+
 <main class="container">
 
     <section>
 
-        <h2>Curriculum Vitae</h2>
+        <div class="cv-heading">
 
-        <div class="cv-frame-wrapper">
+            <h2>Curriculum Vitae</h2>
 
-            <iframe
-                src="assets/files/Bowen_Xie_CV.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                class="cv-frame"
-                title="Bowen Xie Curriculum Vitae">
-            </iframe>
+            <div class="cv-links">
 
+                <a href="assets/files/Bowen_Xie_CV.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Open PDF
+                </a>
+
+                <a href="assets/files/Bowen_Xie_CV.pdf"
+                   download>
+                    Download PDF
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             Loading Message
+        ================================================== -->
+
+        <div id="cv-loading"
+             class="cv-loading">
+
+            Loading Curriculum Vitae...
+
+        </div>
+
+
+        <!-- =================================================
+             CV Pages
+        ================================================== -->
+
+        <div id="cv-pages"
+             class="cv-pages">
         </div>
 
     </section>
 
 </main>
 
+
+
+<!-- =========================================================
+     Footer
+========================================================= -->
 
 <footer>
 
@@ -79,7 +128,190 @@
 </footer>
 
 
-<script src="assets/js/site-ui.js?v=29"></script>
+
+<!-- =========================================================
+     PDF.js
+========================================================= -->
+
+<script type="module">
+
+    import * as pdfjsLib
+        from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+
+
+    const pdfURL =
+        "assets/files/Bowen_Xie_CV.pdf";
+
+
+    const container =
+        document.getElementById("cv-pages");
+
+
+    const loading =
+        document.getElementById("cv-loading");
+
+
+    async function renderCV() {
+
+        try {
+
+            const pdf =
+                await pdfjsLib
+                    .getDocument(pdfURL)
+                    .promise;
+
+
+            loading.style.display =
+                "none";
+
+
+            for (
+                let pageNumber = 1;
+                pageNumber <= pdf.numPages;
+                pageNumber++
+            ) {
+
+                const page =
+                    await pdf.getPage(pageNumber);
+
+
+                const pageWrapper =
+                    document.createElement("div");
+
+
+                pageWrapper.className =
+                    "cv-page";
+
+
+                const canvas =
+                    document.createElement("canvas");
+
+
+                canvas.className =
+                    "cv-page-canvas";
+
+
+                pageWrapper.appendChild(canvas);
+
+                container.appendChild(pageWrapper);
+
+
+                const baseViewport =
+                    page.getViewport({
+                        scale: 1
+                    });
+
+
+                /*
+                 * Render based on the available width.
+                 * Maximum desktop width is approximately
+                 * standard letter-page viewing size.
+                 */
+
+                const availableWidth =
+                    Math.min(
+                        container.clientWidth - 32,
+                        800
+                    );
+
+
+                const scale =
+                    availableWidth /
+                    baseViewport.width;
+
+
+                const viewport =
+                    page.getViewport({
+                        scale: scale
+                    });
+
+
+                const pixelRatio =
+                    window.devicePixelRatio || 1;
+
+
+                canvas.width =
+                    Math.floor(
+                        viewport.width *
+                        pixelRatio
+                    );
+
+
+                canvas.height =
+                    Math.floor(
+                        viewport.height *
+                        pixelRatio
+                    );
+
+
+                canvas.style.width =
+                    viewport.width + "px";
+
+
+                canvas.style.height =
+                    viewport.height + "px";
+
+
+                const context =
+                    canvas.getContext("2d");
+
+
+                await page.render({
+
+                    canvasContext: context,
+
+                    viewport: viewport,
+
+                    transform: [
+                        pixelRatio,
+                        0,
+                        0,
+                        pixelRatio,
+                        0,
+                        0
+                    ]
+
+                }).promise;
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load CV:",
+                error
+            );
+
+
+            loading.innerHTML =
+                'Unable to display the CV. ' +
+                '<a href="' +
+                pdfURL +
+                '" target="_blank">' +
+                'Open the PDF directly' +
+                '</a>.';
+
+        }
+
+    }
+
+
+    renderCV();
+
+</script>
+
+
+
+<!-- =========================================================
+     Site Theme
+========================================================= -->
+
+<script src="assets/js/site-ui.js?v=31"></script>
+
 
 </body>
 
