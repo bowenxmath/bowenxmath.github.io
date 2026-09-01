@@ -76,24 +76,6 @@ nav a:hover {
 }
 
 
-/* =========================================================
-   Site Banner
-========================================================= */
-
-.site-banner {
-    width: 100%;
-    overflow: hidden;
-}
-
-.site-banner img {
-    display: block;
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    object-position: center;
-}
-
-
 
 /* =========================================================
    General Links
@@ -510,6 +492,23 @@ footer {
     }
 }
 
+/* =========================================================
+   Site Banner
+========================================================= */
+
+.site-banner {
+    width: 100%;
+    overflow: hidden;
+}
+
+.site-banner img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    object-position: center;
+}
+
 
 /* =========================================================
    Small Mobile Screens
@@ -519,6 +518,10 @@ footer {
 
     .container {
         width: 92%;
+    }
+
+    .site-banner img {
+        height: 160px;
     }
 
     main {
@@ -538,18 +541,18 @@ footer {
     }
 
     .hero {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    align-items: start;
-   }
-   
-   .hero-photo {
-       max-width: 300px;
-   }
-   
-   .hero-summary h1 {
-       margin-bottom: 15px;
-   }
+        grid-template-columns: 1fr;
+        gap: 28px;
+        align-items: start;
+    }
+
+    .hero-photo {
+        max-width: 300px;
+    }
+
+    .hero-summary h1 {
+        margin-bottom: 15px;
+    }
 
     .notice {
         padding: 18px 20px;
