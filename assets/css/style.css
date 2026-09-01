@@ -1715,3 +1715,45 @@ body.lightbox-open {
         height: 450px;
     }
 }
+
+
+/* =========================================================
+   CV Viewer
+========================================================= */
+
+.cv-frame-wrapper {
+    width: 100%;
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    background: var(--soft-bg);
+}
+
+.cv-frame {
+    display: block;
+
+    width: 100%;
+    height: 900px;
+
+    border: 0;
+
+    background: #ffffff;
+}
+
+@media (max-width: 700px) {
+
+    .cv-frame {
+        height: 700px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .cv-frame {
+        height: 550px;
+    }
+}
+
