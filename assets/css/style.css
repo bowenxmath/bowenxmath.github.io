@@ -3,14 +3,14 @@
 ========================================================= */
 
 :root {
-    color-scheme: light dark;
+    color-scheme: light;
 
     --bg: #ffffff;
     --text: #222222;
     --heading: #222222;
 
     --muted: #666666;
-    --muted-light: #888888;
+    --muted-light: #999999;
 
     --header-bg: #ffffff;
     --soft-bg: #f7f7f7;
@@ -21,7 +21,6 @@
     --link-hover: #004c99;
 
     --search-bg: #ffffff;
-    --search-shadow: rgba(0, 0, 0, 0.18);
 }
 
 
@@ -32,6 +31,8 @@
 @media (prefers-color-scheme: dark) {
 
     :root {
+        color-scheme: dark;
+
         --bg: #181818;
         --text: #e5e5e5;
         --heading: #f1f1f1;
@@ -47,14 +48,13 @@
         --link: #6db2ff;
         --link-hover: #9acbff;
 
-        --search-bg: #222222;
-        --search-shadow: rgba(0, 0, 0, 0.45);
+        --search-bg: #202020;
     }
 }
 
 
 /* =========================================================
-   Manual Light Mode
+   Manual Light Theme
 ========================================================= */
 
 html[data-theme="light"] {
@@ -65,7 +65,7 @@ html[data-theme="light"] {
     --heading: #222222;
 
     --muted: #666666;
-    --muted-light: #888888;
+    --muted-light: #999999;
 
     --header-bg: #ffffff;
     --soft-bg: #f7f7f7;
@@ -76,12 +76,11 @@ html[data-theme="light"] {
     --link-hover: #004c99;
 
     --search-bg: #ffffff;
-    --search-shadow: rgba(0, 0, 0, 0.18);
 }
 
 
 /* =========================================================
-   Manual Dark Mode
+   Manual Dark Theme
 ========================================================= */
 
 html[data-theme="dark"] {
@@ -102,8 +101,7 @@ html[data-theme="dark"] {
     --link: #6db2ff;
     --link-hover: #9acbff;
 
-    --search-bg: #222222;
-    --search-shadow: rgba(0, 0, 0, 0.45);
+    --search-bg: #202020;
 }
 
 
@@ -168,11 +166,9 @@ a:hover {
 
 header {
     background: var(--header-bg);
-    border-bottom: 1px solid var(--border);
 
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease;
+    border-bottom:
+        1px solid var(--border);
 }
 
 .nav-container {
@@ -194,6 +190,7 @@ header {
 
 .site-name a:hover {
     color: var(--link);
+
     text-decoration: none;
 }
 
@@ -215,12 +212,13 @@ nav a {
 
 nav a:hover {
     color: var(--link);
+
     text-decoration: none;
 }
 
 
 /* =========================================================
-   Navigation Icon Buttons
+   Navigation Icons
 ========================================================= */
 
 .nav-icon-button {
@@ -228,37 +226,57 @@ nav a:hover {
     align-items: center;
     justify-content: center;
 
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
 
     margin: 0;
     padding: 0;
 
-    border: none;
-    border-radius: 50%;
+    border: 0;
 
     color: var(--muted);
     background: transparent;
 
     cursor: pointer;
-
-    font-size: 1rem;
-    line-height: 1;
 }
 
 .nav-icon-button:hover {
-    color: var(--link);
-    background: var(--soft-bg);
+    color: var(--heading);
+}
+
+.nav-icon-button:focus {
+    outline: none;
 }
 
 .nav-icon-button:focus-visible {
-    outline: 2px solid var(--link);
-    outline-offset: 2px;
+    outline: 1px solid var(--link);
+    outline-offset: 3px;
+}
+
+.nav-icon {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    fill: none !important;
+    stroke: currentColor !important;
+
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-icon circle,
+.nav-icon line,
+.nav-icon path {
+    fill: none !important;
+    stroke: currentColor !important;
 }
 
 
 /* =========================================================
-   Main Content
+   Main
 ========================================================= */
 
 main {
@@ -293,9 +311,9 @@ h2 {
 
     padding-bottom: 0;
 
-    border-bottom: none;
-
     color: var(--heading);
+
+    border-bottom: none;
 
     font-size: 1.35rem;
     font-weight: 600;
@@ -317,13 +335,14 @@ h3 {
 
 
 /* =========================================================
-   Homepage Profile Section
+   Homepage Profile
 ========================================================= */
 
 .hero {
     display: grid;
 
-    grid-template-columns: 220px 1fr;
+    grid-template-columns:
+        220px 1fr;
 
     gap: 40px;
 
@@ -375,13 +394,9 @@ h3 {
     text-decoration: none;
 }
 
-.directory-link:hover {
-    text-decoration: underline;
-}
-
 
 /* =========================================================
-   Homepage External Links
+   Homepage Links
 ========================================================= */
 
 .links {
@@ -400,10 +415,6 @@ h3 {
     text-decoration: none;
 }
 
-.links a:hover {
-    text-decoration: underline;
-}
-
 
 /* =========================================================
    Biography
@@ -420,10 +431,6 @@ h3 {
     margin-bottom: 18px;
 }
 
-.biography p:last-child {
-    margin-bottom: 0;
-}
-
 
 /* =========================================================
    Prospective Students
@@ -434,7 +441,8 @@ h3 {
 
     background: var(--soft-bg);
 
-    border-left: 3px solid var(--link);
+    border-left:
+        3px solid var(--link);
 }
 
 .notice strong {
@@ -463,9 +471,8 @@ h3 {
     padding: 0;
 
     color: var(--muted);
-    background: none;
 
-    border-radius: 0;
+    background: none;
 
     font-size: 0.95rem;
 }
@@ -506,21 +513,11 @@ h3 {
         serif;
 }
 
-
-/* =========================================================
-   Publication Notes / Status
-========================================================= */
-
 .pub-note {
     color: var(--muted);
 
     font-size: 0.92rem;
 }
-
-
-/* =========================================================
-   Publication Links
-========================================================= */
 
 .pub-links {
     margin-left: 5px;
@@ -533,12 +530,9 @@ h3 {
     padding: 0;
 
     border: none;
-    border-radius: 0;
 
     font-size: 0.88rem;
     font-weight: 500;
-
-    line-height: inherit;
 
     text-decoration: none;
 }
@@ -551,7 +545,7 @@ h3 {
 
 
 /* =========================================================
-   Selected Research Projects
+   Research Projects
 ========================================================= */
 
 .research-project {
@@ -566,10 +560,6 @@ h3 {
     align-items: baseline;
 
     gap: 20px;
-
-    padding-bottom: 0;
-
-    border-bottom: none;
 }
 
 .project-heading h3 {
@@ -583,12 +573,6 @@ h3 {
     color: var(--heading);
 
     text-decoration: none;
-}
-
-.project-heading h3 a:hover {
-    color: var(--link);
-
-    text-decoration: underline;
 }
 
 .project-date {
@@ -608,16 +592,6 @@ h3 {
     font-size: 0.88rem;
 }
 
-.project-affiliation a {
-    color: var(--link);
-
-    text-decoration: none;
-}
-
-.project-affiliation a:hover {
-    text-decoration: underline;
-}
-
 .project-school {
     float: right;
 }
@@ -634,7 +608,7 @@ h3 {
 
 
 /* =========================================================
-   Teaching / Education Lists
+   General Lists
 ========================================================= */
 
 main ul {
@@ -647,59 +621,60 @@ main li {
 
 
 /* =========================================================
-   Horizontal Rules
-========================================================= */
-
-hr {
-    margin: 40px 0;
-
-    border: 0;
-    border-top: 1px solid var(--border);
-}
-
-
-/* =========================================================
    Search Overlay
 ========================================================= */
 
 .search-overlay {
     position: fixed;
+
     inset: 0;
 
-    z-index: 1000;
+    z-index: 9999;
 
     display: none;
 
-    align-items: flex-start;
     justify-content: center;
+    align-items: flex-start;
 
-    padding-top: 100px;
+    padding-top: 90px;
 
-    background: rgba(0, 0, 0, 0.45);
+    background:
+        rgba(0, 0, 0, 0.28);
 
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .search-overlay.active {
     display: flex;
 }
 
-.search-panel {
-    width: min(680px, 90%);
 
-    max-height: 75vh;
+/* =========================================================
+   Search Panel
+========================================================= */
+
+.search-panel {
+    width:
+        min(600px, calc(100% - 40px));
+
+    max-height: 70vh;
 
     overflow-y: auto;
 
-    padding: 22px;
+    padding: 0;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
+
     border-radius: 8px;
 
-    background: var(--search-bg);
+    background:
+        var(--search-bg);
 
     box-shadow:
-        0 12px 40px var(--search-shadow);
+        0 12px 35px
+        rgba(0, 0, 0, 0.18);
 }
 
 
@@ -711,51 +686,120 @@ hr {
     display: flex;
     align-items: center;
 
-    gap: 12px;
+    min-height: 54px;
+
+    padding: 0 16px;
+
+    gap: 10px;
 }
+
+.search-small-icon {
+    flex: 0 0 auto;
+
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    fill: none !important;
+    stroke: var(--muted) !important;
+
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.search-small-icon circle,
+.search-small-icon line {
+    fill: none !important;
+    stroke: var(--muted) !important;
+}
+
+
+/* =========================================================
+   Search Input
+========================================================= */
 
 .search-input {
     flex: 1;
 
-    width: 100%;
+    min-width: 0;
+    height: 52px;
 
-    padding: 11px 13px;
-
-    border: 1px solid var(--border);
-    border-radius: 5px;
-
-    color: var(--text);
-    background: var(--bg);
-
-    font: inherit;
-    font-size: 1rem;
-}
-
-.search-input:focus {
-    outline: 2px solid var(--link);
-    outline-offset: 1px;
-}
-
-.search-close {
-    width: 34px;
-    height: 34px;
-
+    margin: 0;
     padding: 0;
 
-    border: none;
-    border-radius: 50%;
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+
+    color: var(--text);
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.search-input::placeholder {
+    color: var(--muted-light);
+}
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-results-button,
+.search-input::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+
+/* =========================================================
+   Search Close
+========================================================= */
+
+.search-close {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
 
     color: var(--muted);
     background: transparent;
 
     cursor: pointer;
-
-    font-size: 1.4rem;
 }
 
 .search-close:hover {
     color: var(--heading);
-    background: var(--soft-bg);
+}
+
+.search-close:focus {
+    outline: none;
+}
+
+.search-close svg {
+    display: block;
+
+    width: 17px;
+    height: 17px;
+
+    fill: none !important;
+    stroke: currentColor !important;
+
+    stroke-width: 1.7;
+    stroke-linecap: round;
 }
 
 
@@ -764,23 +808,23 @@ hr {
 ========================================================= */
 
 .search-results {
-    margin-top: 18px;
+    margin: 0;
+
+    border-top:
+        1px solid var(--border);
 }
 
-.search-message {
-    margin: 15px 0 5px;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
+.search-results:empty {
+    display: none;
 }
 
 .search-result {
     display: block;
 
-    padding: 12px 5px;
+    padding: 12px 16px;
 
-    border-bottom: 1px solid var(--border);
+    border-bottom:
+        1px solid var(--border);
 
     text-decoration: none;
 }
@@ -790,42 +834,53 @@ hr {
 }
 
 .search-result:hover {
+    background: var(--soft-bg);
+
     text-decoration: none;
 }
 
 .search-result-title {
     display: block;
 
-    color: var(--link);
+    color: var(--heading);
 
+    font-size: 0.95rem;
     font-weight: 600;
+}
+
+.search-result:hover
+.search-result-title {
+    color: var(--link);
 }
 
 .search-result-page {
     display: block;
 
-    margin-top: 2px;
+    margin-top: 1px;
 
     color: var(--muted);
 
-    font-size: 0.82rem;
+    font-size: 0.78rem;
 }
 
 .search-result-text {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 3px;
 
-    color: var(--text);
+    color: var(--muted);
 
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     line-height: 1.5;
 }
 
+.search-empty {
+    padding: 18px 16px;
 
-/* =========================================================
-   Prevent Body Scrolling While Search is Open
-========================================================= */
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
 
 body.search-open {
     overflow: hidden;
@@ -839,7 +894,8 @@ body.search-open {
 footer {
     padding: 24px 0;
 
-    border-top: 1px solid var(--border);
+    border-top:
+        1px solid var(--border);
 
     color: var(--muted-light);
     background: var(--bg);
@@ -926,32 +982,24 @@ footer {
         padding-left: 24px;
     }
 
-    .pub-links {
-        white-space: normal;
-    }
-
     .search-overlay {
-        padding-top: 60px;
+        padding-top: 55px;
     }
 
     .search-panel {
-        max-height: 80vh;
+        width: calc(100% - 30px);
     }
 }
 
 
 /* =========================================================
-   Small Mobile Screens
+   Small Mobile
 ========================================================= */
 
 @media (max-width: 480px) {
 
     body {
         font-size: 15px;
-    }
-
-    .container {
-        width: 92%;
     }
 
     .site-name a {
@@ -966,23 +1014,11 @@ footer {
         font-size: 0.88rem;
     }
 
-    .nav-icon-button {
-        width: 29px;
-        height: 29px;
-    }
-
-    main {
-        padding-top: 32px;
-    }
-
     .hero-photo {
         max-width: 200px;
     }
 
-    .hero-summary h1 {
-        font-size: 1.75rem;
-    }
-
+    .hero-summary h1,
     h1 {
         font-size: 1.75rem;
     }
@@ -991,33 +1027,7 @@ footer {
         font-size: 1.22rem;
     }
 
-    .position {
-        font-size: 1rem;
-    }
-
-    .affiliation {
-        font-size: 0.95rem;
-    }
-
-    .links {
-        gap: 12px;
-    }
-
     .notice {
         padding: 16px 18px;
-    }
-
-    .project-heading h3 {
-        font-size: 1rem;
-    }
-
-    .search-overlay {
-        padding-top: 30px;
-    }
-
-    .search-panel {
-        width: 94%;
-
-        padding: 16px;
     }
 }
