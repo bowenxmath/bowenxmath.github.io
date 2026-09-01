@@ -112,7 +112,6 @@ h1 {
 
 h2 {
     margin-top: 0;
-
     padding-bottom: 8px;
 
     border-bottom: 1px solid #ddd;
@@ -439,7 +438,6 @@ footer {
     .pub-links {
         white-space: normal;
     }
-
 }
 
 
@@ -480,5 +478,4 @@ footer {
     .project-heading h3 {
         font-size: 1.08rem;
     }
-
 }
