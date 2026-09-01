@@ -19,7 +19,8 @@
     const themeButton =
         document.createElement("button");
 
-    themeButton.type = "button";
+    themeButton.type =
+        "button";
 
     themeButton.className =
         "theme-button";
@@ -29,7 +30,9 @@
         "Toggle theme"
     );
 
-    nav.appendChild(themeButton);
+    nav.appendChild(
+        themeButton
+    );
 
 
     /* =====================================================
@@ -139,7 +142,9 @@
     ====================================================== */
 
     const savedTheme =
-        localStorage.getItem("theme");
+        localStorage.getItem(
+            "theme"
+        );
 
 
     if (
@@ -184,7 +189,7 @@
 
 
     /* =====================================================
-       Update Button
+       Update Theme Button
     ====================================================== */
 
     function updateThemeButton() {
@@ -193,7 +198,9 @@
             getCurrentTheme();
 
 
-        if (currentTheme === "dark") {
+        if (
+            currentTheme === "dark"
+        ) {
 
             themeButton.innerHTML =
                 sunIcon;
@@ -283,9 +290,134 @@
 
 
     /* =====================================================
-       Initial Button State
+       Initial Theme Button State
     ====================================================== */
 
     updateThemeButton();
+
+
+    /* =====================================================
+       Create Back-to-Top Button
+    ====================================================== */
+
+    const backToTop =
+        document.createElement(
+            "button"
+        );
+
+
+    backToTop.type =
+        "button";
+
+
+    backToTop.id =
+        "back-to-top";
+
+
+    backToTop.className =
+        "back-to-top";
+
+
+    backToTop.setAttribute(
+        "aria-label",
+        "Back to top"
+    );
+
+
+    backToTop.setAttribute(
+        "title",
+        "Back to top"
+    );
+
+
+    backToTop.innerHTML = `
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true">
+
+            <path
+                d="M12 19V5">
+            </path>
+
+            <path
+                d="M6.5 10.5L12 5l5.5 5.5">
+            </path>
+
+        </svg>
+    `;
+
+
+    document.body.appendChild(
+        backToTop
+    );
+
+
+    /* =====================================================
+       Show / Hide Back-to-Top Button
+    ====================================================== */
+
+    function updateBackToTop() {
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            backToTop.classList.add(
+                "show"
+            );
+
+        } else {
+
+            backToTop.classList.remove(
+                "show"
+            );
+        }
+    }
+
+
+    /* =====================================================
+       Back-to-Top Scroll Listener
+    ====================================================== */
+
+    window.addEventListener(
+        "scroll",
+        updateBackToTop,
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       Back-to-Top Click
+    ====================================================== */
+
+    backToTop.addEventListener(
+        "click",
+        function () {
+
+            const reduceMotion =
+                window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+
+            window.scrollTo({
+                top: 0,
+                behavior:
+                    reduceMotion
+                        ? "auto"
+                        : "smooth"
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       Initial Back-to-Top State
+    ====================================================== */
+
+    updateBackToTop();
 
 })();

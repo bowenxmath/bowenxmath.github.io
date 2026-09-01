@@ -3,15 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Teaching | Bowen Xie</title>
 
     <meta name="description"
           content="Teaching experience and lecture notes of Bowen Xie at The University of Akron, Washington University in St. Louis, and Iowa State University.">
 
-    <link rel="stylesheet" href="assets/css/style.css?v=24">
+    <link rel="stylesheet"
+          href="assets/css/style.css?v=32">
 </head>
+
 
 <body>
 
@@ -31,25 +35,19 @@
         <nav>
 
             <a href="index.html">Home</a>
-        
-            <a href="research.html">Research</a>
-        
-            <a href="talks.html">Talks</a>
-        
-            <a href="teaching.html">Teaching</a>
-        
-            <a href="education.html">Education</a>
-        
-            <!-- <a href="assets/files/Bowen_Xie_CV.pdf"
-               target="_blank"
-               rel="noopener noreferrer">
-                CV
-            </a> -->
 
-            <a href="cv.html">CV</a>
-        
+            <a href="research.html">Research</a>
+
+            <a href="talks.html">Talks</a>
+
+            <a href="teaching.html">Teaching</a>
+
+            <a href="education.html">Education</a>
+
+            <!-- <a href="cv.html">CV</a> -->
+
             <a href="misc.html">Misc.</a>
-        
+
         </nav>
 
     </div>
@@ -92,7 +90,9 @@
         <div class="notes-list">
 
 
-            <!-- Precalculus -->
+            <!-- =================================================
+                 Precalculus
+            ================================================== -->
 
             <div class="note-viewer">
 
@@ -110,21 +110,42 @@
 
                 </div>
 
-                <div class="note-frame-wrapper">
 
-                    <iframe
-                        src="assets/files/precalculus_lecture_notes.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                        class="note-frame"
-                        loading="lazy"
-                        title="MATH 149 Precalculus Lecture Notes">
-                    </iframe>
+                <div class="note-pdf-wrapper"
+                     data-pdf="assets/files/precalculus_lecture_notes.pdf">
+
+                    <div class="note-pdf-toolbar">
+
+                        <span class="note-page-count">
+                            Loading...
+                        </span>
+
+                        <a href="assets/files/precalculus_lecture_notes.pdf"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="note-open-pdf">
+                            Open PDF
+                        </a>
+
+                    </div>
+
+
+                    <div class="note-loading">
+                        Loading lecture notes...
+                    </div>
+
+
+                    <div class="note-pages"></div>
 
                 </div>
 
             </div>
 
 
-            <!-- Ordinary Differential Equations -->
+
+            <!-- =================================================
+                 Ordinary Differential Equations
+            ================================================== -->
 
             <div class="note-viewer">
 
@@ -142,14 +163,32 @@
 
                 </div>
 
-                <div class="note-frame-wrapper">
 
-                    <iframe
-                        src="assets/files/ode_lecture_notes.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                        class="note-frame"
-                        loading="lazy"
-                        title="MATH 335 Ordinary Differential Equations Lecture Notes">
-                    </iframe>
+                <div class="note-pdf-wrapper"
+                     data-pdf="assets/files/ode_lecture_notes.pdf">
+
+                    <div class="note-pdf-toolbar">
+
+                        <span class="note-page-count">
+                            Loading...
+                        </span>
+
+                        <a href="assets/files/ode_lecture_notes.pdf"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="note-open-pdf">
+                            Open PDF
+                        </a>
+
+                    </div>
+
+
+                    <div class="note-loading">
+                        Loading lecture notes...
+                    </div>
+
+
+                    <div class="note-pages"></div>
 
                 </div>
 
@@ -998,33 +1037,430 @@
 
 
 <!-- =========================================================
-     Lecture Notes Viewer
+     PDF.js Lecture Notes Viewer
 ========================================================= -->
 
-<script>
-document.querySelectorAll(".note-toggle").forEach(function (button) {
+<script type="module">
 
-    button.addEventListener("click", function () {
+    import * as pdfjsLib
+        from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
 
-        const noteViewer = button.closest(".note-viewer");
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+
+
+    const viewers =
+        document.querySelectorAll(".note-viewer");
+
+
+    viewers.forEach(function (viewer) {
+
+        const button =
+            viewer.querySelector(".note-toggle");
 
         const wrapper =
-            noteViewer.querySelector(".note-frame-wrapper");
+            viewer.querySelector(".note-pdf-wrapper");
 
-        const isOpen =
-            wrapper.classList.toggle("open");
+        const pagesContainer =
+            viewer.querySelector(".note-pages");
 
-        button.textContent =
-            isOpen ? "Hide Notes" : "View Notes";
+        const loading =
+            viewer.querySelector(".note-loading");
 
-        button.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
+        const pageCount =
+            viewer.querySelector(".note-page-count");
+
+        const pdfURL =
+            wrapper.dataset.pdf;
+
+
+        let pdfDocument = null;
+
+        let initialized = false;
+
+        let observer = null;
+
+
+        /* =====================================================
+           Create page placeholders
+        ====================================================== */
+
+        async function initializePDF() {
+
+            if (initialized) {
+                return;
+            }
+
+            initialized = true;
+
+
+            try {
+
+                pdfDocument =
+                    await pdfjsLib
+                        .getDocument(pdfURL)
+                        .promise;
+
+
+                pageCount.textContent =
+                    pdfDocument.numPages +
+                    (pdfDocument.numPages === 1
+                        ? " page"
+                        : " pages");
+
+
+                loading.style.display =
+                    "none";
+
+
+                for (
+                    let pageNumber = 1;
+                    pageNumber <= pdfDocument.numPages;
+                    pageNumber++
+                ) {
+
+                    const pageWrapper =
+                        document.createElement("div");
+
+
+                    pageWrapper.className =
+                        "note-page";
+
+
+                    pageWrapper.dataset.pageNumber =
+                        pageNumber;
+
+
+                    const placeholder =
+                        document.createElement("div");
+
+
+                    placeholder.className =
+                        "note-page-placeholder";
+
+
+                    placeholder.textContent =
+                        "Page " + pageNumber;
+
+
+                    pageWrapper.appendChild(
+                        placeholder
+                    );
+
+
+                    pagesContainer.appendChild(
+                        pageWrapper
+                    );
+
+                }
+
+
+                createObserver();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to load lecture notes:",
+                    error
+                );
+
+
+                pageCount.textContent =
+                    "Unable to load PDF";
+
+
+                loading.innerHTML =
+                    'Unable to display the lecture notes. ' +
+                    '<a href="' +
+                    pdfURL +
+                    '" target="_blank" ' +
+                    'rel="noopener noreferrer">' +
+                    'Open the PDF directly' +
+                    '</a>.';
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           Render one PDF page
+        ====================================================== */
+
+        async function renderPage(pageWrapper) {
+
+            if (
+                pageWrapper.dataset.rendered === "true" ||
+                pageWrapper.dataset.rendering === "true"
+            ) {
+                return;
+            }
+
+
+            pageWrapper.dataset.rendering =
+                "true";
+
+
+            const pageNumber =
+                Number(
+                    pageWrapper.dataset.pageNumber
+                );
+
+
+            try {
+
+                const page =
+                    await pdfDocument.getPage(
+                        pageNumber
+                    );
+
+
+                const baseViewport =
+                    page.getViewport({
+                        scale: 1
+                    });
+
+
+                const availableWidth =
+                    Math.min(
+                        pagesContainer.clientWidth - 20,
+                        800
+                    );
+
+
+                const scale =
+                    availableWidth /
+                    baseViewport.width;
+
+
+                const viewport =
+                    page.getViewport({
+                        scale: scale
+                    });
+
+
+                const canvas =
+                    document.createElement("canvas");
+
+
+                canvas.className =
+                    "note-page-canvas";
+
+
+                const context =
+                    canvas.getContext(
+                        "2d"
+                    );
+
+
+                /*
+                 * Cap the pixel ratio to avoid excessive
+                 * memory use on high-resolution phones.
+                 */
+
+                const pixelRatio =
+                    Math.min(
+                        window.devicePixelRatio || 1,
+                        2
+                    );
+
+
+                canvas.width =
+                    Math.floor(
+                        viewport.width *
+                        pixelRatio
+                    );
+
+
+                canvas.height =
+                    Math.floor(
+                        viewport.height *
+                        pixelRatio
+                    );
+
+
+                canvas.style.width =
+                    viewport.width + "px";
+
+
+                canvas.style.height =
+                    viewport.height + "px";
+
+
+                pageWrapper.innerHTML =
+                    "";
+
+
+                pageWrapper.appendChild(
+                    canvas
+                );
+
+
+                await page.render({
+
+                    canvasContext:
+                        context,
+
+                    viewport:
+                        viewport,
+
+                    transform: [
+                        pixelRatio,
+                        0,
+                        0,
+                        pixelRatio,
+                        0,
+                        0
+                    ]
+
+                }).promise;
+
+
+                pageWrapper.dataset.rendered =
+                    "true";
+
+
+                pageWrapper.dataset.rendering =
+                    "false";
+
+
+                if (observer) {
+
+                    observer.unobserve(
+                        pageWrapper
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to render page " +
+                    pageNumber +
+                    ":",
+                    error
+                );
+
+
+                pageWrapper.dataset.rendering =
+                    "false";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           Lazy rendering
+        ====================================================== */
+
+        function createObserver() {
+
+            observer =
+                new IntersectionObserver(
+
+                    function (entries) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    renderPage(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+
+                    {
+                        root: null,
+
+                        /*
+                         * Start rendering shortly before
+                         * the page enters the viewport.
+                         */
+
+                        rootMargin:
+                            "800px 0px 800px 0px",
+
+                        threshold:
+                            0.01
+                    }
+
+                );
+
+
+            pagesContainer
+                .querySelectorAll(
+                    ".note-page"
+                )
+                .forEach(
+                    function (page) {
+
+                        observer.observe(
+                            page
+                        );
+
+                    }
+                );
+
+        }
+
+
+
+        /* =====================================================
+           Open / close viewer
+        ====================================================== */
+
+        button.addEventListener(
+            "click",
+            async function () {
+
+                const isOpen =
+                    wrapper.classList.toggle(
+                        "open"
+                    );
+
+
+                button.textContent =
+                    isOpen
+                        ? "Hide Notes"
+                        : "View Notes";
+
+
+                button.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                        ? "true"
+                        : "false"
+                );
+
+
+                if (isOpen) {
+
+                    await initializePDF();
+
+                }
+
+            }
         );
 
     });
 
-});
 </script>
 
 
@@ -1033,8 +1469,16 @@ document.querySelectorAll(".note-toggle").forEach(function (button) {
      Theme
 ========================================================= -->
 
-<script src="assets/js/site-ui.js?v=24"></script>
+<script src="assets/js/site-ui.js?v=32"></script>
 
+<!-- Cloudflare Web Analytics -->
+<script
+    type="module"
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"fb4ef226d3494499b52de643a8ed042f"}'>
+</script>
+<!-- End Cloudflare Web Analytics -->
+    
 
 </body>
 
