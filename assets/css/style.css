@@ -889,6 +889,8 @@ h3 {
     color: var(--muted);
 
     font-size: 0.88rem;
+
+    line-height: 1.6;
 }
 
 .project-affiliation a {
@@ -901,9 +903,15 @@ h3 {
     text-decoration: underline;
 }
 
+
+/* Secondary affiliation / collaboration line */
+
 .project-school {
-    float: right;
+    display: block;
+
+    margin-top: 3px;
 }
+
 
 .research-project ul {
     margin-top: 10px;
@@ -1268,8 +1276,6 @@ footer {
 
     .project-school {
         display: block;
-
-        float: none;
 
         margin-top: 3px;
     }
