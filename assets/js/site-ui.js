@@ -289,3 +289,55 @@
     updateThemeButton();
 
 })();
+
+
+/* =========================================================
+   Back to Top
+========================================================= */
+
+(function () {
+
+    const button =
+        document.getElementById("back-to-top");
+
+    if (!button) {
+        return;
+    }
+
+    function updateBackToTop() {
+
+        if (window.scrollY > 500) {
+
+            button.classList.add("show");
+
+        } else {
+
+            button.classList.remove("show");
+
+        }
+
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateBackToTop,
+        {
+            passive: true
+        }
+    );
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+    updateBackToTop();
+
+})();
