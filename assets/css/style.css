@@ -375,6 +375,21 @@ nav a:hover {
 
 
 /* =========================================================
+   Education Banner
+========================================================= */
+
+.education-banner {
+    background-image: url("../images/banner_education.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.education-banner .banner-overlay {
+    background: rgba(20, 20, 20, 0.12);
+}
+
+
+/* =========================================================
    Main Content
 ========================================================= */
 
@@ -758,7 +773,61 @@ h3 {
 
 
 /* =========================================================
-   Teaching / Education Lists
+   Education Entries
+========================================================= */
+
+.education-entry {
+    margin-bottom: 42px;
+}
+
+.education-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    gap: 20px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.education-heading h2 {
+    margin: 0;
+    padding: 0;
+
+    border-bottom: none;
+}
+
+.education-date {
+    white-space: nowrap;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
+
+.education-school {
+    margin-top: 16px;
+    margin-bottom: 6px;
+}
+
+.education-advisor {
+    margin-left: 8px;
+
+    color: var(--muted);
+}
+
+.education-details {
+    margin-top: 4px;
+    margin-bottom: 0;
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   Teaching / General Lists
 ========================================================= */
 
 main ul {
@@ -880,6 +949,23 @@ footer {
         float: none;
 
         margin-top: 3px;
+    }
+
+    .education-heading {
+        display: block;
+    }
+
+    .education-date {
+        display: block;
+
+        margin-top: 5px;
+    }
+
+    .education-advisor {
+        display: block;
+
+        margin-left: 0;
+        margin-top: 4px;
     }
 
     .publications {
