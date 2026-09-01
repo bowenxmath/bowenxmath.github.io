@@ -410,11 +410,109 @@ nav a:hover {
 .talks-banner {
     background-image: url("../images/banner_talks.jpg");
     background-size: cover;
-    background-position: center;
+
+    /*
+     * Crops the original tree photograph into the
+     * horizontal website banner.
+     */
+    background-position: center 48%;
 }
 
 .talks-banner .banner-overlay {
-    background: rgba(20, 20, 20, 0.18);
+    background: rgba(20, 20, 20, 0.25);
+}
+
+
+/* =========================================================
+   Talks
+========================================================= */
+
+.talks-list {
+    width: 100%;
+}
+
+.talk-entry {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    gap: 28px;
+
+    align-items: start;
+
+    margin-bottom: 20px;
+}
+
+.talk-content {
+    min-width: 0;
+}
+
+.talk-event {
+    color: var(--text);
+
+    line-height: 1.45;
+}
+
+.talk-event strong {
+    color: var(--heading);
+
+    font-weight: 600;
+}
+
+.talk-title {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 0.96rem;
+    font-style: italic;
+
+    line-height: 1.5;
+}
+
+.talk-meta {
+    min-width: 150px;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+
+    text-align: right;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   Talks Mobile
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .talk-entry {
+        display: block;
+
+        margin-bottom: 24px;
+    }
+
+    .talk-meta {
+        margin-top: 5px;
+
+        min-width: 0;
+
+        text-align: left;
+
+        white-space: normal;
+    }
 }
 
 
