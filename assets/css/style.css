@@ -131,25 +131,76 @@ h3 {
 
 .hero {
     display: grid;
+    grid-template-columns: 300px 1fr;
 
-    grid-template-columns: 280px 1fr;
+    gap: 55px;
 
-    gap: 45px;
+    align-items: center;
 
-    align-items: start;
+    margin-bottom: 38px;
 }
 
 .hero-photo img {
     display: block;
 
     width: 100%;
+    height: auto;
 
-    border-radius: 4px;
+    border-radius: 5px;
+}
+
+.hero-summary h1 {
+    margin-bottom: 22px;
 }
 
 .position {
-    font-size: 1.15rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    font-size: 1.25rem;
+    font-weight: 650;
+}
+
+.affiliation {
+    margin-bottom: 24px;
+
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 22px;
+
+    margin-top: 25px;
+}
+
+.links a {
+    text-decoration: none;
+
     font-weight: 600;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   Biography
+========================================================= */
+
+.biography {
+    max-width: 950px;
+
+    margin-bottom: 55px;
+}
+
+.biography p {
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 
@@ -468,8 +519,18 @@ footer {
     }
 
     .hero {
-        gap: 28px;
-    }
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+   }
+   
+   .hero-photo {
+       max-width: 300px;
+   }
+   
+   .hero-summary h1 {
+       margin-bottom: 15px;
+   }
 
     .notice {
         padding: 18px 20px;
