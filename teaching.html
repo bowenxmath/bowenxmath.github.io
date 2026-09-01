@@ -8,9 +8,9 @@
     <title>Teaching | Bowen Xie</title>
 
     <meta name="description"
-          content="Teaching experience of Bowen Xie at The University of Akron, Washington University in St. Louis, and Iowa State University.">
+          content="Teaching experience and lecture notes of Bowen Xie at The University of Akron, Washington University in St. Louis, and Iowa State University.">
 
-    <link rel="stylesheet" href="assets/css/style.css?v=23">
+    <link rel="stylesheet" href="assets/css/style.css?v=24">
 </head>
 
 <body>
@@ -85,56 +85,70 @@
 
         <div class="notes-list">
 
-            <div class="note-entry">
 
-                <div class="note-title">
-                    MATH 149 &mdash; Precalculus
+            <!-- Precalculus -->
+
+            <div class="note-viewer">
+
+                <div class="note-viewer-header">
+
+                    <div class="note-title">
+                        MATH 149 &mdash; Precalculus
+                    </div>
+
+                    <button class="note-toggle"
+                            type="button"
+                            aria-expanded="false">
+                        View Notes
+                    </button>
+
                 </div>
 
-                <div class="note-links">
+                <div class="note-frame-wrapper">
 
-                    <a href="assets/files/precalculus_lecture_notes.pdf"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="note-link">
-                        View PDF
-                    </a>
+                    <iframe
+                        src="assets/files/precalculus_lecture_notes.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                        class="note-frame"
+                        loading="lazy"
+                        title="MATH 149 Precalculus Lecture Notes">
+                    </iframe>
 
-                    <a href="assets/files/precalculus_lecture_notes.pdf"
-                       download
-                       class="note-link">
-                        Download
-                    </a>
+                </div>
+
+            </div>
+
+
+            <!-- Ordinary Differential Equations -->
+
+            <div class="note-viewer">
+
+                <div class="note-viewer-header">
+
+                    <div class="note-title">
+                        MATH 335 &mdash; Introduction to Ordinary Differential Equations
+                    </div>
+
+                    <button class="note-toggle"
+                            type="button"
+                            aria-expanded="false">
+                        View Notes
+                    </button>
+
+                </div>
+
+                <div class="note-frame-wrapper">
+
+                    <iframe
+                        src="assets/files/ode_lecture_notes.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                        class="note-frame"
+                        loading="lazy"
+                        title="MATH 335 Ordinary Differential Equations Lecture Notes">
+                    </iframe>
 
                 </div>
 
             </div>
 
-
-            <div class="note-entry">
-
-                <div class="note-title">
-                    MATH 335 &mdash; Introduction to Ordinary Differential Equations
-                </div>
-
-                <div class="note-links">
-
-                    <a href="assets/files/ode_lecture_notes.pdf"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="note-link">
-                        View PDF
-                    </a>
-
-                    <a href="assets/files/ode_lecture_notes.pdf"
-                       download
-                       class="note-link">
-                        Download
-                    </a>
-
-                </div>
-
-            </div>
 
         </div>
 
@@ -978,10 +992,42 @@
 
 
 <!-- =========================================================
-     JavaScript
+     Lecture Notes Viewer
 ========================================================= -->
 
-<script src="assets/js/site-ui.js?v=23"></script>
+<script>
+document.querySelectorAll(".note-toggle").forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        const noteViewer = button.closest(".note-viewer");
+
+        const wrapper =
+            noteViewer.querySelector(".note-frame-wrapper");
+
+        const isOpen =
+            wrapper.classList.toggle("open");
+
+        button.textContent =
+            isOpen ? "Hide Notes" : "View Notes";
+
+        button.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+    });
+
+});
+</script>
+
+
+
+<!-- =========================================================
+     Theme
+========================================================= -->
+
+<script src="assets/js/site-ui.js?v=24"></script>
 
 
 </body>
