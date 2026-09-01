@@ -403,6 +403,37 @@ nav a:hover {
     background: rgba(20, 20, 20, 0.16);
 }
 
+/* =========================================================
+   Talks Banner
+========================================================= */
+
+.talks-banner {
+    background-image: url("../images/banner_talks.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.talks-banner .banner-overlay {
+    background: rgba(20, 20, 20, 0.18);
+}
+
+
+/* =========================================================
+   Misc Banner
+========================================================= */
+
+.misc-banner {
+    background-image: url("../images/banner_misc.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.misc-banner .banner-overlay {
+    background: rgba(20, 20, 20, 0.18);
+}
+
+
+
 
 /* =========================================================
    Main Content
