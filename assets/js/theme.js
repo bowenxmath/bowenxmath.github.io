@@ -1,26 +1,34 @@
-/* =========================================================
-   Theme Management
-========================================================= */
-
 (function () {
 
-    const themeToggle =
-        document.getElementById("theme-toggle");
+    const toggle = document.getElementById("theme-toggle");
+    const iconPath = document.getElementById("theme-icon-path");
 
-    const systemDark =
-        window.matchMedia("(prefers-color-scheme: dark)");
+    const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
 
-    const savedTheme =
-        localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme");
 
 
-    /* -----------------------------------------------------
-       Restore Manual Theme
-    ----------------------------------------------------- */
+    const moonPath =
+        "M20 15.5A8 8 0 0 1 8.5 4 " +
+        "8 8 0 1 0 20 15.5Z";
 
-    if (savedTheme === "light" ||
-        savedTheme === "dark") {
 
+    const sunPath =
+        "M12 4V2 " +
+        "M12 22V20 " +
+        "M4 12H2 " +
+        "M22 12H20 " +
+        "M5.64 5.64L4.22 4.22 " +
+        "M19.78 19.78L18.36 18.36 " +
+        "M18.36 5.64L19.78 4.22 " +
+        "M4.22 19.78L5.64 18.36 " +
+        "M16 12A4 4 0 1 1 8 12 " +
+        "A4 4 0 0 1 16 12Z";
+
+
+    if (savedTheme === "light" || savedTheme === "dark") {
         document.documentElement.setAttribute(
             "data-theme",
             savedTheme
@@ -28,66 +36,52 @@
     }
 
 
-    /* -----------------------------------------------------
-       Determine Effective Theme
-    ----------------------------------------------------- */
-
     function getCurrentTheme() {
 
         const manualTheme =
-            document.documentElement.getAttribute(
-                "data-theme"
-            );
+            document.documentElement.getAttribute("data-theme");
 
-        if (manualTheme === "light" ||
-            manualTheme === "dark") {
-
+        if (
+            manualTheme === "light" ||
+            manualTheme === "dark"
+        ) {
             return manualTheme;
         }
 
-        return systemDark.matches
-            ? "dark"
-            : "light";
+        return systemDark.matches ? "dark" : "light";
     }
 
 
-    /* -----------------------------------------------------
-       Update Button
-    ----------------------------------------------------- */
+    function updateIcon() {
 
-    function updateButton() {
-
-        if (!themeToggle) {
+        if (!toggle || !iconPath) {
             return;
         }
 
-        const currentTheme =
-            getCurrentTheme();
+        if (getCurrentTheme() === "dark") {
 
-        if (currentTheme === "dark") {
+            iconPath.setAttribute("d", sunPath);
 
-            themeToggle.textContent = "☀";
-
-            themeToggle.setAttribute(
+            toggle.setAttribute(
                 "aria-label",
                 "Switch to light mode"
             );
 
-            themeToggle.setAttribute(
+            toggle.setAttribute(
                 "title",
                 "Switch to light mode"
             );
 
         } else {
 
-            themeToggle.textContent = "☾";
+            iconPath.setAttribute("d", moonPath);
 
-            themeToggle.setAttribute(
+            toggle.setAttribute(
                 "aria-label",
                 "Switch to dark mode"
             );
 
-            themeToggle.setAttribute(
+            toggle.setAttribute(
                 "title",
                 "Switch to dark mode"
             );
@@ -95,56 +89,38 @@
     }
 
 
-    /* -----------------------------------------------------
-       Manual Toggle
-    ----------------------------------------------------- */
+    if (toggle) {
 
-    if (themeToggle) {
+        toggle.addEventListener("click", function () {
 
-        themeToggle.addEventListener(
-            "click",
-            function () {
+            const newTheme =
+                getCurrentTheme() === "dark"
+                    ? "light"
+                    : "dark";
 
-                const currentTheme =
-                    getCurrentTheme();
+            document.documentElement.setAttribute(
+                "data-theme",
+                newTheme
+            );
 
-                const newTheme =
-                    currentTheme === "dark"
-                        ? "light"
-                        : "dark";
+            localStorage.setItem(
+                "theme",
+                newTheme
+            );
 
-                document.documentElement.setAttribute(
-                    "data-theme",
-                    newTheme
-                );
-
-                localStorage.setItem(
-                    "theme",
-                    newTheme
-                );
-
-                updateButton();
-            }
-        );
-
+            updateIcon();
+        });
     }
 
 
-    /* -----------------------------------------------------
-       Follow System if User Has Not Manually Chosen
-    ----------------------------------------------------- */
+    systemDark.addEventListener("change", function () {
 
-    systemDark.addEventListener(
-        "change",
-        function () {
-
-            if (!localStorage.getItem("theme")) {
-                updateButton();
-            }
+        if (!localStorage.getItem("theme")) {
+            updateIcon();
         }
-    );
+    });
 
 
-    updateButton();
+    updateIcon();
 
 })();
