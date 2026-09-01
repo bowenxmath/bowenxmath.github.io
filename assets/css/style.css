@@ -630,7 +630,7 @@ footer {
    Small Mobile Screens
 ========================================================= */
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
 
     .container {
         width: 92%;
@@ -676,5 +676,36 @@ footer {
 
     .project-heading h3 {
         font-size: 1.08rem;
+    }
+} */
+
+@media (max-width: 700px) {
+
+    .hero-header {
+        height: 300px;
+    }
+
+    .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 10px;
+
+        padding: 16px 20px;
+    }
+
+    .top-nav nav {
+        flex-wrap: wrap;
+
+        gap: 10px 16px;
+    }
+
+    .banner-title h1 {
+        font-size: 2.2rem;
+    }
+
+    .banner-line {
+        width: 65px;
+        height: 4px;
     }
 }
