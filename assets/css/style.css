@@ -938,3 +938,99 @@ footer {
     text-shadow:
         0 1px 4px rgba(0, 0, 0, 0.35);
 }
+
+/* =========================================================
+   Page Banners
+========================================================= */
+
+.page-banner {
+    position: relative;
+
+    width: 100%;
+    height: 280px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   Research Banner Image
+========================================================= */
+
+.research-banner {
+    background-image: url("../images/banner_research.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* =========================================================
+   Banner Overlay
+========================================================= */
+
+.page-banner-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(45, 45, 45, 0.38);
+}
+
+
+/* =========================================================
+   Banner Title
+========================================================= */
+
+.page-banner-title {
+    position: relative;
+    z-index: 1;
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(2.7rem, 5vw, 4.6rem);
+    font-weight: 400;
+
+    letter-spacing: 0.16em;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   Mobile Page Banner
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .page-banner {
+        height: 200px;
+    }
+
+    .page-banner-title {
+        font-size: 2.4rem;
+        letter-spacing: 0.12em;
+    }
+}
+
+
+/* =========================================================
+   Research Banner
+========================================================= */
+
+.research-banner {
+    background-image: url("../images/banner_research.jpg");
+}
+
