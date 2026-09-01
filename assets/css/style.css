@@ -132,7 +132,7 @@ h3 {
 .hero {
     display: grid;
 
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 280px 1fr;
 
     gap: 45px;
 
@@ -406,7 +406,7 @@ footer {
     }
 
     .hero-photo {
-        max-width: 210px;
+        max-width: 260px;
     }
 
     h1 {
