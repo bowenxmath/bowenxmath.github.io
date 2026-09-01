@@ -35,7 +35,20 @@ body {
 
 
 /* =========================================================
-   Hero Header / Banner
+   General Links
+========================================================= */
+
+a {
+    color: #0066cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   Banner Header
 ========================================================= */
 
 .hero-header {
@@ -44,23 +57,33 @@ body {
     width: 100%;
     height: 380px;
 
-    background-image: url("../images/banner_cropped.jpg");
+    background-image:
+        url("../images/banner_cropped.jpg");
+
     background-size: cover;
-    background-position: center 48%;
+
+    background-position:
+        center 48%;
 
     overflow: hidden;
 }
+
+
+/* =========================================================
+   Banner Overlay
+========================================================= */
 
 .hero-overlay {
     position: absolute;
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.46);
+    background:
+        rgba(0, 0, 0, 0.46);
 }
 
 
 /* =========================================================
-   Navigation inside banner
+   Banner Navigation
 ========================================================= */
 
 .top-nav {
@@ -70,22 +93,693 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    padding: 14px 28px;
+    padding: 15px 28px;
 }
 
 .top-nav .site-name a {
     color: #fff;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-size: 1rem;
     font-weight: 700;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 
     text-decoration: none;
 }
 
+.top-nav .site-name a:hover {
+    opacity: 0.8;
+}
+
 .top-nav nav {
+    display: flex;
+    align-items: center;
+
+    gap: 19px;
+}
+
+.top-nav nav a {
+    color: #fff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 0.9rem;
+
+    text-decoration: none;
+}
+
+.top-nav nav a:hover {
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   Banner Center Title
+========================================================= */
+
+.banner-title {
+    position: absolute;
+
+    top: 52%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+.banner-title h1 {
+    margin: 0;
+
+    color: #fff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 3rem;
+
+    font-style: italic;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.banner-line {
+    width: 80px;
+    height: 5px;
+
+    margin: 20px auto 0;
+
+    background: #62b5e5;
+}
+
+
+/* =========================================================
+   Main Homepage Sections
+========================================================= */
+
+main {
+    margin: 0;
+    padding: 0;
+}
+
+.home-intro {
+    margin: 0;
+
+    padding: 55px 0 45px;
+
+    background: #fff;
+}
+
+.biography-band {
+    margin: 0;
+
+    padding: 45px 0;
+
+    background: #f1f1f1;
+}
+
+.home-content {
+    margin: 0;
+
+    padding: 50px 0 70px;
+
+    background: #fff;
+}
+
+
+/* =========================================================
+   Headings
+========================================================= */
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+
+    font-size: 2.5rem;
+
+    line-height: 1.2;
+}
+
+h2 {
+    margin-top: 0;
+
+    padding-bottom: 8px;
+
+    border-bottom:
+        1px solid #ddd;
+
+    font-size: 1.55rem;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   Homepage Faculty Summary
+========================================================= */
+
+.hero {
+    display: grid;
+
+    grid-template-columns:
+        290px 1fr;
+
+    gap: 55px;
+
+    align-items: center;
+}
+
+.hero-photo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 5px;
+}
+
+.hero-summary h1 {
+    margin-bottom: 18px;
+}
+
+.position {
+    margin-top: 0;
+    margin-bottom: 18px;
+
+    font-size: 1.25rem;
+    font-weight: 650;
+}
+
+.affiliation {
+    margin-top: 0;
+    margin-bottom: 22px;
+
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.directory-link {
+    margin-left: 5px;
+
+    font-size: 0.9rem;
+
+    text-decoration: none;
+}
+
+.directory-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   Scholar / LinkedIn / CV Links
+========================================================= */
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+.links a {
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   Biography
+========================================================= */
+
+.biography {
+    max-width: 950px;
+
+    margin: 0 auto;
+}
+
+.biography p {
+    margin-top: 0;
+
+    margin-bottom: 20px;
+}
+
+.biography p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   Homepage White Content
+========================================================= */
+
+.home-content .container > section {
+    margin-bottom: 55px;
+}
+
+.home-content .container > section:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   Prospective Students
+========================================================= */
+
+.notice {
+    padding: 22px 25px;
+
+    background: #f6f8fa;
+
+    border-left:
+        4px solid #0066cc;
+}
+
+.notice strong {
+    font-size: 1.05rem;
+}
+
+.notice p {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   Research Interests
+========================================================= */
+
+.interests {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.interests span {
+    padding: 7px 12px;
+
+    background: #f2f2f2;
+
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   Publications
+========================================================= */
+
+.publications {
+    padding-left: 30px;
+}
+
+.publications li {
+    margin-bottom: 18px;
+
+    padding-left: 6px;
+
+    line-height: 1.7;
+}
+
+.publications strong {
+    font-weight: 700;
+}
+
+.publications em {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* =========================================================
+   Publication Notes
+========================================================= */
+
+.pub-note {
+    color: #555;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   Publication Links
+========================================================= */
+
+.pub-links {
+    display: inline;
+
+    white-space: nowrap;
+
+    margin-left: 2px;
+}
+
+.pub-link {
+    display: inline-block;
+
+    margin-left: 5px;
+
+    padding: 1px 7px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 4px;
+
+    font-size: 0.82rem;
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    text-decoration: none;
+}
+
+.pub-link:hover {
+    background: #f3f3f3;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   Research Projects
+========================================================= */
+
+.research-project {
+    margin-top: 36px;
+    margin-bottom: 45px;
+}
+
+.project-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: baseline;
+
+    gap: 25px;
+
+    padding-bottom: 5px;
+
+    border-bottom:
+        1px solid #e5e5e5;
+}
+
+.project-heading h3 {
+    margin: 0;
+
+    font-size: 1.15rem;
+}
+
+.project-heading h3 a {
+    text-decoration: none;
+}
+
+.project-heading h3 a:hover {
+    text-decoration: underline;
+}
+
+.project-date {
+    white-space: nowrap;
+
+    color: #555;
+
+    font-size: 0.92rem;
+}
+
+.project-affiliation {
+    margin-top: 7px;
+    margin-bottom: 13px;
+
+    color: #555;
+
+    font-size: 0.93rem;
+}
+
+.project-affiliation a {
+    text-decoration: none;
+}
+
+.project-affiliation a:hover {
+    text-decoration: underline;
+}
+
+.project-school {
+    float: right;
+}
+
+.research-project ul {
+    margin-top: 12px;
+
+    padding-left: 25px;
+}
+
+.research-project li {
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   Footer
+========================================================= */
+
+footer {
+    padding: 25px 0;
+
+    border-top:
+        1px solid #e5e5e5;
+
+    color: #666;
+
+    background: #fff;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   Tablet / Mobile
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .hero-header {
+        height: 300px;
+    }
+
+    .top-nav {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        padding:
+            16px 20px;
+    }
+
+    .top-nav nav {
+        flex-wrap: wrap;
+
+        gap:
+            10px 16px;
+    }
+
+    .banner-title {
+        top: 58%;
+    }
+
+    .banner-title h1 {
+        font-size: 2.2rem;
+    }
+
+    .banner-line {
+        width: 65px;
+        height: 4px;
+
+        margin-top: 16px;
+    }
+
+    .home-intro {
+        padding:
+            40px 0;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        gap: 28px;
+
+        align-items: start;
+    }
+
+    .hero-photo {
+        max-width: 280px;
+    }
+
+    .hero-summary h1 {
+        font-size: 2rem;
+
+        margin-bottom: 15px;
+    }
+
+    .biography-band {
+        padding:
+            38px 0;
+    }
+
+    .home-content {
+        padding:
+            40px 0 60px;
+    }
+
+    .project-heading {
+        display: block;
+    }
+
+    .project-date {
+        display: block;
+
+        margin-top: 6px;
+    }
+
+    .project-school {
+        display: block;
+
+        float: none;
+
+        margin-top: 3px;
+    }
+
+    .publications {
+        padding-left: 24px;
+    }
+
+    .pub-links {
+        white-space: normal;
+    }
+}
+
+
+/* =========================================================
+   Small Mobile Screens
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .hero-header {
+        height: 255px;
+    }
+
+    .top-nav {
+        padding:
+            13px 15px;
+    }
+
+    .top-nav .site-name a {
+        font-size: 0.92rem;
+    }
+
+    .top-nav nav {
+        gap:
+            7px 11px;
+    }
+
+    .top-nav nav a {
+        font-size: 0.82rem;
+    }
+
+    .banner-title {
+        top: 61%;
+    }
+
+    .banner-title h1 {
+        font-size: 1.85rem;
+    }
+
+    .banner-line {
+        width: 55px;
+        height: 4px;
+
+        margin-top: 13px;
+    }
+
+    .home-intro {
+        padding:
+            34px 0;
+    }
+
+    .hero-photo {
+        max-width: 260px;
+    }
+
+    .hero-summary h1 {
+        font-size: 1.85rem;
+    }
+
+    .position {
+        font-size: 1.12rem;
+    }
+
+    .affiliation {
+        font-size: 1rem;
+    }
+
+    .links {
+        gap: 14px;
+    }
+
+    .biography-band {
+        padding:
+            32px 0;
+    }
+
+    .home-content {
+        padding:
+            35px 0 50px;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+
+    .notice {
+        padding:
+            18px 20px;
+    }
+
+    .project-heading h3 {
+        font-size: 1.08rem;
+    }
+}.top-nav nav {
     display: flex;
     align-items: center;
 
