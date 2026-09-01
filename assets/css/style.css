@@ -1056,34 +1056,179 @@ h3 {
     outline-offset: 2px;
 }
 
-.note-frame-wrapper {
+
+/* =========================================================
+   Lecture Notes PDF.js Wrapper
+========================================================= */
+
+.note-pdf-wrapper {
     display: none;
 
     width: 100%;
 
     margin-top: 14px;
 
+    padding: 18px;
+
     border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: #d8d8d8;
+}
+
+.note-pdf-wrapper.open {
+    display: block;
+}
+
+
+/* =========================================================
+   Lecture Notes Toolbar
+========================================================= */
+
+.note-pdf-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 16px;
+
+    padding: 8px 10px;
+
     border-radius: 4px;
 
-    overflow: hidden;
+    background: var(--bg);
+}
+
+.note-page-count {
+    color: var(--muted);
+
+    font-size: 0.82rem;
+}
+
+.note-open-pdf {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 3px 9px;
+
+    border: 1px solid var(--control-border);
+    border-radius: 4px;
+
+    color: var(--link);
+    background: transparent;
+
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    text-decoration: none;
+}
+
+.note-open-pdf:hover {
+    color: var(--link-hover);
 
     background: var(--soft-bg);
+
+    text-decoration: none;
 }
 
-.note-frame-wrapper.open {
-    display: block;
+
+/* =========================================================
+   Lecture Notes Loading
+========================================================= */
+
+.note-loading {
+    padding: 30px 15px;
+
+    color: var(--muted);
+
+    text-align: center;
 }
 
-.note-frame {
-    display: block;
+
+/* =========================================================
+   Lecture Notes Pages
+========================================================= */
+
+.note-pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
 
     width: 100%;
-    height: 700px;
+}
 
-    border: 0;
+.note-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+
+    min-height: 180px;
+}
+
+.note-page-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: min(100%, 800px);
+    min-height: 180px;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    color: var(--muted);
+
+    background: #eeeeee;
+
+    font-size: 0.82rem;
+}
+
+.note-page-canvas {
+    display: block;
+
+    max-width: 100%;
+    height: auto;
 
     background: #ffffff;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================================
+   Lecture Notes Dark Mode
+========================================================= */
+
+html[data-theme="dark"] .note-pdf-wrapper {
+    background: #2c2c2c;
+}
+
+html[data-theme="dark"] .note-page-placeholder {
+    color: #bdbdbd;
+    background: #3a3a3a;
+
+    border-color: #505050;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    html:not([data-theme="light"]) .note-pdf-wrapper {
+        background: #2c2c2c;
+    }
+
+    html:not([data-theme="light"]) .note-page-placeholder {
+        color: #bdbdbd;
+        background: #3a3a3a;
+
+        border-color: #505050;
+    }
 }
 
 
@@ -1700,8 +1845,26 @@ footer {
         margin-top: 8px;
     }
 
-    .note-frame {
-        height: 550px;
+    .note-pdf-wrapper {
+        padding: 8px;
+    }
+
+    .note-pdf-toolbar {
+        margin-bottom: 10px;
+
+        padding: 7px 8px;
+    }
+
+    .note-pages {
+        gap: 14px;
+    }
+
+    .note-page {
+        min-height: 140px;
+    }
+
+    .note-page-placeholder {
+        min-height: 140px;
     }
 
 
@@ -1891,8 +2054,40 @@ footer {
 
     /* Lecture Notes */
 
-    .note-frame {
-        height: 450px;
+    .note-pdf-wrapper {
+        padding: 5px;
+    }
+
+    .note-pdf-toolbar {
+        gap: 8px;
+
+        margin-bottom: 8px;
+
+        padding: 6px;
+    }
+
+    .note-page-count {
+        font-size: 0.76rem;
+    }
+
+    .note-open-pdf {
+        padding: 2px 7px;
+
+        font-size: 0.76rem;
+    }
+
+    .note-pages {
+        gap: 10px;
+    }
+
+    .note-page {
+        min-height: 110px;
+    }
+
+    .note-page-placeholder {
+        min-height: 110px;
+
+        font-size: 0.76rem;
     }
 
 
