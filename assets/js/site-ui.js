@@ -1,19 +1,154 @@
 (function () {
 
     /* =====================================================
-       Navigation
+       Helpers
     ====================================================== */
 
-    const nav = document.querySelector("header nav");
+    function cleanText(text) {
+        return (text || "")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
+
+    function slugify(text) {
+
+        return cleanText(text)
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+    }
+
+
+    function escapeRegExp(text) {
+        return text.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
+    }
+
+
+    /* =====================================================
+       Add Stable IDs to Sections and Projects
+    ====================================================== */
+
+    function assignSearchIds(doc) {
+
+        const main = doc.querySelector("main");
+
+        if (!main) {
+            return;
+        }
+
+
+        /* -------------------------------------------------
+           Sections
+        -------------------------------------------------- */
+
+        const sections =
+            main.querySelectorAll("section");
+
+        sections.forEach(function (section, index) {
+
+            if (section.id) {
+                return;
+            }
+
+            let heading = null;
+
+            for (const child of section.children) {
+
+                if (
+                    child.tagName === "H1" ||
+                    child.tagName === "H2" ||
+                    child.tagName === "H3"
+                ) {
+
+                    heading = child;
+                    break;
+                }
+            }
+
+
+            if (heading) {
+
+                const slug =
+                    slugify(heading.textContent);
+
+                if (slug) {
+                    section.id = slug;
+                }
+
+            } else {
+
+                section.id =
+                    "section-" + (index + 1);
+            }
+
+        });
+
+
+        /* -------------------------------------------------
+           Research Projects
+        -------------------------------------------------- */
+
+        const projects =
+            main.querySelectorAll(
+                ".research-project"
+            );
+
+        projects.forEach(function (project, index) {
+
+            if (project.id) {
+                return;
+            }
+
+            const heading =
+                project.querySelector("h3");
+
+            if (heading) {
+
+                const slug =
+                    slugify(heading.textContent);
+
+                if (slug) {
+                    project.id = slug;
+                }
+
+            } else {
+
+                project.id =
+                    "research-project-" +
+                    (index + 1);
+            }
+        });
+    }
+
+
+    /*
+     * Do this immediately on the current page.
+     */
+
+    assignSearchIds(document);
+
+
+    /* =====================================================
+       Theme Controls
+    ====================================================== */
+
+    const nav =
+        document.querySelector("header nav");
 
     if (!nav) {
         return;
     }
 
 
-    /* =====================================================
-       Create Search Button
-    ====================================================== */
+    /* -----------------------------------------------------
+       Search Button
+    ----------------------------------------------------- */
 
     const searchButton =
         document.createElement("button");
@@ -34,9 +169,9 @@
     );
 
 
-    /* =====================================================
-       Create Theme Button
-    ====================================================== */
+    /* -----------------------------------------------------
+       Theme Button
+    ----------------------------------------------------- */
 
     const themeButton =
         document.createElement("button");
@@ -96,6 +231,7 @@
                 theme
             );
 
+
         if (theme === "dark") {
 
             themeButton.setAttribute(
@@ -152,16 +288,19 @@
                     ? "light"
                     : "dark";
 
+
             document.documentElement
                 .setAttribute(
                     "data-theme",
                     next
                 );
 
+
             localStorage.setItem(
                 "theme",
                 next
             );
+
 
             updateThemeState();
         }
@@ -175,6 +314,7 @@
             if (
                 !localStorage.getItem("theme")
             ) {
+
                 updateThemeState();
             }
         }
@@ -185,7 +325,7 @@
 
 
     /* =====================================================
-       Build Search Overlay
+       Create Search Window
     ====================================================== */
 
     const overlay =
@@ -285,39 +425,40 @@
 
 
     /* =====================================================
-       Search Index
+       Pages to Search
     ====================================================== */
 
     const pages = [
+
         {
             url: "index.html",
             name: "Home"
         },
+
         {
             url: "research.html",
             name: "Research"
         },
+
         {
             url: "teaching.html",
             name: "Teaching"
         },
+
         {
             url: "education.html",
             name: "Education"
         }
+
     ];
 
 
     let searchIndex = [];
 
 
-    function cleanText(text) {
-
-        return text
-            .replace(/\s+/g, " ")
-            .trim();
-    }
-
+    /* =====================================================
+       Build Search Index
+    ====================================================== */
 
     async function buildSearchIndex() {
 
@@ -356,6 +497,14 @@
                     );
 
 
+                /*
+                 * Generate exactly the same section IDs
+                 * that exist on the live page.
+                 */
+
+                assignSearchIds(doc);
+
+
                 const main =
                     doc.querySelector("main");
 
@@ -378,12 +527,26 @@
                 sections.forEach(
                     function (section) {
 
-                        const heading =
-                            section.querySelector(
-                                ":scope > h1, " +
-                                ":scope > h2, " +
-                                ":scope > h3"
-                            );
+                        let heading = null;
+
+
+                        for (
+                            const child
+                            of section.children
+                        ) {
+
+                            if (
+                                child.tagName === "H1" ||
+                                child.tagName === "H2" ||
+                                child.tagName === "H3"
+                            ) {
+
+                                heading =
+                                    child;
+
+                                break;
+                            }
+                        }
 
 
                         const title =
@@ -406,10 +569,21 @@
 
 
                         entries.push({
-                            page: page.name,
-                            url: page.url,
-                            title: title,
-                            text: text
+
+                            page:
+                                page.name,
+
+                            url:
+                                page.url,
+
+                            id:
+                                section.id,
+
+                            title:
+                                title,
+
+                            text:
+                                text
                         });
 
                     }
@@ -417,7 +591,7 @@
 
 
                 /* -----------------------------------------
-                   Research Projects
+                   Individual Research Projects
                 ------------------------------------------ */
 
                 const projects =
@@ -443,32 +617,32 @@
                                 : "Research Project";
 
 
-                        entries.push({
-                            page: page.name,
-                            url: page.url,
-                            title: title,
-                            text: cleanText(
+                        const text =
+                            cleanText(
                                 project.textContent
-                            )
+                            );
+
+
+                        entries.push({
+
+                            page:
+                                page.name,
+
+                            url:
+                                page.url,
+
+                            id:
+                                project.id,
+
+                            title:
+                                title,
+
+                            text:
+                                text
                         });
 
                     }
                 );
-
-
-                /* -----------------------------------------
-                   Whole Page
-                ------------------------------------------ */
-
-                entries.push({
-                    page: page.name,
-                    url: page.url,
-                    title: page.name,
-                    text: cleanText(
-                        main.textContent
-                    )
-                });
-
 
             } catch (error) {
 
@@ -481,13 +655,12 @@
         }
 
 
-        searchIndex =
-            entries;
+        searchIndex = entries;
     }
 
 
     /* =====================================================
-       Search Window
+       Open / Close Search
     ====================================================== */
 
     async function openSearch() {
@@ -496,20 +669,25 @@
             "is-open"
         );
 
+
         overlay.setAttribute(
             "aria-hidden",
             "false"
         );
 
+
         document.body.classList.add(
             "search-open"
         );
+
 
         input.value = "";
 
         results.innerHTML = "";
 
+
         input.focus();
+
 
         await buildSearchIndex();
     }
@@ -521,14 +699,17 @@
             "is-open"
         );
 
+
         overlay.setAttribute(
             "aria-hidden",
             "true"
         );
 
+
         document.body.classList.remove(
             "search-open"
         );
+
 
         input.value = "";
 
@@ -537,7 +718,7 @@
 
 
     /* =====================================================
-       Search Results
+       Snippet
     ====================================================== */
 
     function makeSnippet(
@@ -565,7 +746,7 @@
         const start =
             Math.max(
                 0,
-                position - 65
+                position - 70
             );
 
 
@@ -599,6 +780,10 @@
         return snippet;
     }
 
+
+    /* =====================================================
+       Run Search
+    ====================================================== */
 
     function runSearch() {
 
@@ -635,7 +820,7 @@
                 )
                 .slice(
                     0,
-                    12
+                    15
                 );
 
 
@@ -651,15 +836,19 @@
                     "div"
                 );
 
+
             empty.className =
                 "site-search-empty";
+
 
             empty.textContent =
                 "No results found.";
 
+
             results.appendChild(
                 empty
             );
+
 
             return;
         }
@@ -673,11 +862,24 @@
                         "a"
                     );
 
+
                 link.className =
                     "site-search-result";
 
+
+                /*
+                 * IMPORTANT:
+                 *
+                 * q = word to highlight
+                 * #id = exact place to scroll to
+                 */
+
                 link.href =
-                    result.url;
+                    result.url +
+                    "?q=" +
+                    encodeURIComponent(query) +
+                    "#" +
+                    encodeURIComponent(result.id);
 
 
                 const title =
@@ -685,8 +887,10 @@
                         "span"
                     );
 
+
                 title.className =
                     "site-search-result-title";
+
 
                 title.textContent =
                     result.title;
@@ -697,8 +901,10 @@
                         "span"
                     );
 
+
                 page.className =
                     "site-search-result-page";
+
 
                 page.textContent =
                     result.page;
@@ -709,8 +915,10 @@
                         "span"
                     );
 
+
                 text.className =
                     "site-search-result-text";
+
 
                 text.textContent =
                     makeSnippet(
@@ -723,9 +931,11 @@
                     title
                 );
 
+
                 link.appendChild(
                     page
                 );
+
 
                 link.appendChild(
                     text
@@ -737,6 +947,259 @@
                 );
 
             }
+        );
+    }
+
+
+    /* =====================================================
+       Highlight Search Result on Destination Page
+    ====================================================== */
+
+    function highlightText(
+        root,
+        query
+    ) {
+
+        if (!root || !query) {
+            return;
+        }
+
+
+        const regex =
+            new RegExp(
+                "(" +
+                escapeRegExp(query) +
+                ")",
+                "gi"
+            );
+
+
+        const walker =
+            document.createTreeWalker(
+                root,
+                NodeFilter.SHOW_TEXT
+            );
+
+
+        const nodes = [];
+
+
+        while (
+            walker.nextNode()
+        ) {
+
+            const node =
+                walker.currentNode;
+
+
+            const parent =
+                node.parentElement;
+
+
+            if (!parent) {
+                continue;
+            }
+
+
+            /*
+             * Do not modify scripts,
+             * styles, inputs, buttons, etc.
+             */
+
+            if (
+                parent.closest(
+                    "script, style, " +
+                    "input, textarea, " +
+                    "button, mark"
+                )
+            ) {
+
+                continue;
+            }
+
+
+            if (
+                node.nodeValue &&
+                node.nodeValue
+                    .toLowerCase()
+                    .includes(
+                        query.toLowerCase()
+                    )
+            ) {
+
+                nodes.push(node);
+            }
+        }
+
+
+        nodes.forEach(
+            function (node) {
+
+                const fragment =
+                    document.createDocumentFragment();
+
+
+                const pieces =
+                    node.nodeValue
+                        .split(regex);
+
+
+                pieces.forEach(
+                    function (piece) {
+
+                        if (
+                            piece.toLowerCase() ===
+                            query.toLowerCase()
+                        ) {
+
+                            const mark =
+                                document.createElement(
+                                    "mark"
+                                );
+
+
+                            mark.className =
+                                "search-highlight";
+
+
+                            mark.textContent =
+                                piece;
+
+
+                            fragment.appendChild(
+                                mark
+                            );
+
+                        } else {
+
+                            fragment.appendChild(
+                                document.createTextNode(
+                                    piece
+                                )
+                            );
+                        }
+                    }
+                );
+
+
+                node.parentNode.replaceChild(
+                    fragment,
+                    node
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       Scroll to Search Result on Page Load
+    ====================================================== */
+
+    function showSearchDestination() {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const query =
+            params.get("q");
+
+
+        if (!query) {
+            return;
+        }
+
+
+        let target = null;
+
+
+        if (window.location.hash) {
+
+            const id =
+                decodeURIComponent(
+                    window.location.hash
+                        .substring(1)
+                );
+
+
+            target =
+                document.getElementById(
+                    id
+                );
+        }
+
+
+        if (!target) {
+
+            target =
+                document.querySelector(
+                    "main"
+                );
+        }
+
+
+        if (!target) {
+            return;
+        }
+
+
+        /*
+         * Highlight matching words.
+         */
+
+        highlightText(
+            target,
+            query
+        );
+
+
+        /*
+         * Brief visual indication of
+         * the selected section.
+         */
+
+        target.classList.add(
+            "search-target"
+        );
+
+
+        /*
+         * Wait until layout is complete.
+         */
+
+        setTimeout(
+            function () {
+
+                target.scrollIntoView({
+
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "center"
+                });
+
+            },
+            150
+        );
+
+
+        /*
+         * Remove section flash later,
+         * but keep text highlighting.
+         */
+
+        setTimeout(
+            function () {
+
+                target.classList.remove(
+                    "search-target"
+                );
+
+            },
+            2200
         );
     }
 
@@ -771,6 +1234,7 @@
                 event.target ===
                 overlay
             ) {
+
                 closeSearch();
             }
         }
@@ -820,5 +1284,12 @@
             }
         }
     );
+
+
+    /* =====================================================
+       Highlight Destination
+    ====================================================== */
+
+    showSearchDestination();
 
 })();
