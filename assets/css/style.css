@@ -903,6 +903,87 @@ h3 {
 
 
 /* =========================================================
+   Lecture Notes
+========================================================= */
+
+.notes-list {
+    width: 100%;
+
+    display: grid;
+
+    gap: 0;
+}
+
+.note-entry {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    gap: 24px;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.note-entry:first-child {
+    padding-top: 4px;
+}
+
+.note-entry:last-child {
+    border-bottom: none;
+}
+
+.note-title {
+    min-width: 0;
+
+    color: var(--text);
+
+    font-weight: 500;
+}
+
+.note-links {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    white-space: nowrap;
+}
+
+.note-link {
+    display: inline-block;
+
+    padding: 2px 8px;
+
+    border: 1px solid var(--control-border);
+    border-radius: 4px;
+
+    color: var(--link);
+    background: transparent;
+
+    font-size: 0.82rem;
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    text-decoration: none;
+}
+
+.note-link:hover {
+    color: var(--link-hover);
+
+    background: var(--soft-bg);
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
    General Lists
 ========================================================= */
 
@@ -994,6 +1075,7 @@ footer {
 
     .hero-photo {
         width: 100%;
+
         max-width: 320px;
     }
 
@@ -1008,6 +1090,9 @@ footer {
     h2 {
         font-size: 1.28rem;
     }
+
+
+    /* Research projects */
 
     .project-heading {
         display: block;
@@ -1027,6 +1112,9 @@ footer {
         margin-top: 3px;
     }
 
+
+    /* Education */
+
     .education-heading {
         display: block;
     }
@@ -1043,6 +1131,9 @@ footer {
         margin-left: 0;
         margin-top: 4px;
     }
+
+
+    /* Teaching */
 
     .teaching-entry {
         display: block;
@@ -1062,6 +1153,26 @@ footer {
         margin-left: 0;
         margin-top: 1px;
     }
+
+
+    /* Lecture Notes */
+
+    .note-entry {
+        display: block;
+
+        padding: 12px 0;
+    }
+
+    .note-links {
+        margin-top: 7px;
+    }
+
+    .note-link {
+        margin-right: 3px;
+    }
+
+
+    /* Publications */
 
     .publications {
         padding-left: 24px;
@@ -1120,6 +1231,7 @@ footer {
 
     .hero-photo {
         width: 100%;
+
         max-width: 280px;
     }
 
@@ -1150,5 +1262,9 @@ footer {
 
     .project-heading h3 {
         font-size: 1rem;
+    }
+
+    .note-links {
+        flex-wrap: wrap;
     }
 }
