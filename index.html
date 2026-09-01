@@ -13,6 +13,62 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
+
+<!-- =========================================================
+     Search
+========================================================= -->
+
+<div
+    class="search-overlay"
+    id="search-overlay"
+    aria-hidden="true">
+
+    <div
+        class="search-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search website">
+
+        <div class="search-header">
+
+            <input
+                class="search-input"
+                id="search-input"
+                type="search"
+                placeholder="Search..."
+                autocomplete="off"
+                aria-label="Search website">
+
+            <button
+                class="search-close"
+                id="search-close"
+                type="button"
+                aria-label="Close search">
+                &times;
+            </button>
+
+        </div>
+
+        <div
+            class="search-results"
+            id="search-results">
+
+            <p class="search-message">
+                Type to search the website.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/search.js"></script>
+
+    
+
 <body>
 
 <header>
@@ -23,6 +79,7 @@
         </div>
 
         <nav>
+        
             <a href="index.html">Home</a>
             <a href="research.html">Research</a>
             <a href="teaching.html">Teaching</a>
@@ -34,21 +91,25 @@
                 CV
             </a>
         
-            <button class="nav-icon-button"
-                    id="search-toggle"
-                    type="button"
-                    aria-label="Search">
-                &#128269;
+            <button
+                class="nav-icon-button"
+                id="search-toggle"
+                type="button"
+                aria-label="Search"
+                title="Search">
+                🔍
             </button>
         
-            <button class="nav-icon-button"
-                    id="theme-toggle"
-                    type="button"
-                    aria-label="Toggle dark mode">
-                &#9790;
+            <button
+                class="nav-icon-button"
+                id="theme-toggle"
+                type="button"
+                aria-label="Toggle theme"
+                title="Toggle theme">
+                ☾
             </button>
+        
         </nav>
-
     </div>
 </header>
 
@@ -230,7 +291,6 @@
 
 </footer>
 
-<script src="assets/js/theme.js"></script>
 
 </body>
 
