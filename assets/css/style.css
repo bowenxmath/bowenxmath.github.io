@@ -15,13 +15,15 @@
     --header-bg: #ffffff;
     --soft-bg: #f6f6f6;
 
-    --border: #e7e7e7;
+    --border: #dddddd;
 
     --link: #0066cc;
     --link-hover: #004c99;
 
     --control-bg: #f5f5f5;
-    --control-border: #dddddd;
+    --control-border: #cccccc;
+
+    --theme-icon: #444444;
 }
 
 
@@ -44,13 +46,15 @@
         --header-bg: #181818;
         --soft-bg: #242424;
 
-        --border: #343434;
+        --border: #3b3b3b;
 
         --link: #70b7ff;
         --link-hover: #a2d0ff;
 
-        --control-bg: #252525;
-        --control-border: #444444;
+        --control-bg: #282828;
+        --control-border: #505050;
+
+        --theme-icon: #eeeeee;
     }
 }
 
@@ -72,13 +76,15 @@ html[data-theme="light"] {
     --header-bg: #ffffff;
     --soft-bg: #f6f6f6;
 
-    --border: #e7e7e7;
+    --border: #dddddd;
 
     --link: #0066cc;
     --link-hover: #004c99;
 
     --control-bg: #f5f5f5;
-    --control-border: #dddddd;
+    --control-border: #cccccc;
+
+    --theme-icon: #444444;
 }
 
 
@@ -99,13 +105,15 @@ html[data-theme="dark"] {
     --header-bg: #181818;
     --soft-bg: #242424;
 
-    --border: #343434;
+    --border: #3b3b3b;
 
     --link: #70b7ff;
     --link-hover: #a2d0ff;
 
-    --control-bg: #252525;
-    --control-border: #444444;
+    --control-bg: #282828;
+    --control-border: #505050;
+
+    --theme-icon: #eeeeee;
 }
 
 
@@ -170,6 +178,7 @@ a:hover {
 
 header {
     background: var(--header-bg);
+
     border-bottom: 1px solid var(--border);
 
     transition:
@@ -196,6 +205,7 @@ header {
 
 .site-name a:hover {
     color: var(--link);
+
     text-decoration: none;
 }
 
@@ -217,6 +227,7 @@ nav a {
 
 nav a:hover {
     color: var(--link);
+
     text-decoration: none;
 }
 
@@ -232,27 +243,19 @@ nav a:hover {
 
     flex: 0 0 auto;
 
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
 
-    margin-left: 2px;
+    margin-left: 4px;
     padding: 0;
 
     border: 1px solid var(--control-border);
-    border-radius: 7px;
+    border-radius: 8px;
 
-    color: var(--muted);
+    color: var(--theme-icon);
     background: var(--control-bg);
 
     cursor: pointer;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 18px;
-    line-height: 1;
 
     transition:
         color 0.15s ease,
@@ -263,7 +266,9 @@ nav a:hover {
 
 .theme-button:hover {
     color: var(--heading);
+
     background: var(--bg);
+
     border-color: var(--muted-light);
 
     transform: translateY(-1px);
@@ -280,6 +285,25 @@ nav a:hover {
 .theme-button:focus-visible {
     outline: 2px solid var(--link);
     outline-offset: 2px;
+}
+
+
+/* =========================================================
+   Theme SVG Icon
+========================================================= */
+
+.theme-button svg {
+    display: block;
+
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 
@@ -303,7 +327,7 @@ section {
 
 h1 {
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 
     color: var(--heading);
 
@@ -313,13 +337,16 @@ h1 {
     line-height: 1.25;
 }
 
+
+/* Horizontal line under every section heading */
+
 h2 {
     margin-top: 0;
     margin-bottom: 20px;
 
-    padding-bottom: 0;
+    padding-bottom: 8px;
 
-    border-bottom: none;
+    border-bottom: 1px solid var(--border);
 
     color: var(--heading);
 
@@ -806,10 +833,13 @@ footer {
     }
 
     .theme-button {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+    }
 
-        font-size: 17px;
+    .theme-button svg {
+        width: 18px;
+        height: 18px;
     }
 
     main {
