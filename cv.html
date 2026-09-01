@@ -3,23 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CV | Bowen Xie</title>
 
-    <link rel="stylesheet"
-          href="assets/css/style.css?v=30">
+    <link rel="stylesheet" href="assets/css/style.css?v=29">
 </head>
 
-
 <body>
-
-
-<!-- =========================================================
-     Header
-========================================================= -->
 
 <header>
 
@@ -52,107 +43,35 @@
 </header>
 
 
-
-<!-- =========================================================
-     Main
-========================================================= -->
-
 <main class="container">
 
     <section>
 
         <h2>Curriculum Vitae</h2>
 
+        <div class="cv-frame-wrapper">
 
-        <!-- =================================================
-             CV Controls
-        ================================================== -->
-
-        <div class="cv-controls">
-
-            <button id="prev-page"
-                    class="cv-button"
-                    type="button">
-                Previous
-            </button>
-
-
-            <div class="cv-page-info">
-
-                Page
-
-                <span id="page-num">
-                    1
-                </span>
-
-                of
-
-                <span id="page-count">
-                    --
-                </span>
-
-            </div>
-
-
-            <button id="next-page"
-                    class="cv-button"
-                    type="button">
-                Next
-            </button>
-
-
-            <button id="zoom-out"
-                    class="cv-button"
-                    type="button"
-                    aria-label="Zoom out">
-                &minus;
-            </button>
-
-
-            <button id="zoom-in"
-                    class="cv-button"
-                    type="button"
-                    aria-label="Zoom in">
-                +
-            </button>
+            <iframe
+                src="assets/files/Bowen_Xie_CV.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                class="cv-frame"
+                title="Bowen Xie Curriculum Vitae">
+            </iframe>
 
         </div>
-
-
-
-        <!-- =================================================
-             PDF Canvas
-        ================================================== -->
-
-        <div class="cv-viewer">
-
-            <canvas id="cv-canvas"></canvas>
-
-        </div>
-
 
     </section>
 
 </main>
 
 
-
-<!-- =========================================================
-     Footer
-========================================================= -->
-
 <footer>
 
     <div class="container">
 
         &copy; 2026 Bowen Xie
-
         &middot;
-
         Department of Mathematics
-
         &middot;
-
         The University of Akron
 
     </div>
@@ -160,273 +79,7 @@
 </footer>
 
 
-
-<!-- =========================================================
-     PDF.js
-========================================================= -->
-
-<script type="module">
-
-    import * as pdfjsLib
-        from "./assets/js/pdfjs/pdf.min.mjs";
-
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "./assets/js/pdfjs/pdf.worker.min.mjs";
-
-
-    const pdfURL =
-        "./assets/files/Bowen_Xie_CV.pdf";
-
-
-    let pdfDoc = null;
-
-    let pageNum = 1;
-
-    let scale = 1.35;
-
-    let rendering = false;
-
-    let pendingPage = null;
-
-
-    const canvas =
-        document.getElementById("cv-canvas");
-
-    const context =
-        canvas.getContext("2d");
-
-    const pageNumElement =
-        document.getElementById("page-num");
-
-    const pageCountElement =
-        document.getElementById("page-count");
-
-
-    async function renderPage(number) {
-
-        rendering = true;
-
-
-        const page =
-            await pdfDoc.getPage(number);
-
-
-        const viewport =
-            page.getViewport({
-                scale: scale
-            });
-
-
-        const pixelRatio =
-            window.devicePixelRatio || 1;
-
-
-        canvas.width =
-            Math.floor(
-                viewport.width * pixelRatio
-            );
-
-
-        canvas.height =
-            Math.floor(
-                viewport.height * pixelRatio
-            );
-
-
-        canvas.style.width =
-            Math.floor(viewport.width) + "px";
-
-
-        canvas.style.height =
-            Math.floor(viewport.height) + "px";
-
-
-        const renderContext = {
-
-            canvasContext: context,
-
-            viewport: viewport,
-
-            transform: [
-                pixelRatio,
-                0,
-                0,
-                pixelRatio,
-                0,
-                0
-            ]
-
-        };
-
-
-        await page.render(
-            renderContext
-        ).promise;
-
-
-        rendering = false;
-
-
-        pageNumElement.textContent =
-            pageNum;
-
-
-        if (pendingPage !== null) {
-
-            const nextPage =
-                pendingPage;
-
-            pendingPage =
-                null;
-
-            renderPage(nextPage);
-
-        }
-
-    }
-
-
-    function queueRenderPage(number) {
-
-        if (rendering) {
-
-            pendingPage =
-                number;
-
-        } else {
-
-            renderPage(number);
-
-        }
-
-    }
-
-
-    function previousPage() {
-
-        if (pageNum <= 1) {
-            return;
-        }
-
-
-        pageNum--;
-
-        queueRenderPage(pageNum);
-
-    }
-
-
-    function nextPage() {
-
-        if (
-            !pdfDoc ||
-            pageNum >= pdfDoc.numPages
-        ) {
-            return;
-        }
-
-
-        pageNum++;
-
-        queueRenderPage(pageNum);
-
-    }
-
-
-    function zoomIn() {
-
-        if (scale >= 2.5) {
-            return;
-        }
-
-
-        scale += 0.15;
-
-        queueRenderPage(pageNum);
-
-    }
-
-
-    function zoomOut() {
-
-        if (scale <= 0.7) {
-            return;
-        }
-
-
-        scale -= 0.15;
-
-        queueRenderPage(pageNum);
-
-    }
-
-
-
-    document
-        .getElementById("prev-page")
-        .addEventListener(
-            "click",
-            previousPage
-        );
-
-
-    document
-        .getElementById("next-page")
-        .addEventListener(
-            "click",
-            nextPage
-        );
-
-
-    document
-        .getElementById("zoom-in")
-        .addEventListener(
-            "click",
-            zoomIn
-        );
-
-
-    document
-        .getElementById("zoom-out")
-        .addEventListener(
-            "click",
-            zoomOut
-        );
-
-
-
-    pdfjsLib
-        .getDocument(pdfURL)
-        .promise
-        .then(function (pdf) {
-
-            pdfDoc =
-                pdf;
-
-
-            pageCountElement.textContent =
-                pdfDoc.numPages;
-
-
-            renderPage(pageNum);
-
-        })
-        .catch(function (error) {
-
-            console.error(
-                "Unable to load CV:",
-                error
-            );
-
-        });
-
-</script>
-
-
-
-<script src="assets/js/site-ui.js?v=30"></script>
-
+<script src="assets/js/site-ui.js?v=29"></script>
 
 </body>
 
