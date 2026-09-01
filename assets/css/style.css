@@ -1196,6 +1196,288 @@ footer {
 
 
 /* =========================================================
+   Misc Photo Gallery
+========================================================= */
+
+.gallery-intro {
+    margin-top: 0;
+
+    color: var(--muted);
+}
+
+.photo-location {
+    margin-bottom: 56px;
+}
+
+.location-heading {
+    position: relative;
+}
+
+.location-heading h2 {
+    margin-bottom: 4px;
+}
+
+.location-subtitle {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: var(--muted);
+
+    font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   Photo Grid
+========================================================= */
+
+.photo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 26px 22px;
+}
+
+.photo-card {
+    margin: 0;
+}
+
+.photo-button {
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    background: none;
+
+    cursor: pointer;
+}
+
+.photo-button:focus {
+    outline: none;
+}
+
+.photo-button:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
+}
+
+.photo-card img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 2;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+
+    transition:
+        transform 0.22s ease,
+        opacity 0.22s ease;
+}
+
+.photo-button:hover img {
+    transform: scale(1.015);
+
+    opacity: 0.95;
+}
+
+.photo-card figcaption {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   Photo Lightbox
+========================================================= */
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.photo-lightbox {
+    position: fixed;
+    z-index: 1000;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 80px;
+
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.photo-lightbox.open {
+    display: flex;
+}
+
+.lightbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    max-width: min(1200px, 90vw);
+    max-height: 90vh;
+}
+
+.lightbox-content img {
+    display: block;
+
+    max-width: 100%;
+    max-height: 82vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 3px;
+}
+
+.lightbox-caption {
+    margin-top: 12px;
+
+    color: #eeeeee;
+
+    font-size: 0.9rem;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   Lightbox Controls
+========================================================= */
+
+.lightbox-close {
+    position: absolute;
+
+    top: 18px;
+    right: 24px;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    border: 0;
+
+    color: #ffffff;
+    background: transparent;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.lightbox-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    width: 44px;
+    height: 54px;
+
+    padding: 0;
+
+    transform: translateY(-50%);
+
+    border: 0;
+
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.25);
+
+    font-size: 1.7rem;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+}
+
+.lightbox-arrow:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+
+/* =========================================================
+   Misc Gallery Mobile
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .photo-grid {
+        grid-template-columns: 1fr;
+
+        gap: 24px;
+    }
+
+    .photo-lightbox {
+        padding: 55px 18px 70px;
+    }
+
+    .lightbox-content {
+        max-width: 100%;
+    }
+
+    .lightbox-content img {
+        max-height: 75vh;
+    }
+
+    .lightbox-arrow {
+        top: auto;
+        bottom: 15px;
+
+        transform: none;
+    }
+
+    .lightbox-prev {
+        left: calc(50% - 58px);
+    }
+
+    .lightbox-next {
+        right: calc(50% - 58px);
+    }
+
+}
+
+
+/* =========================================================
    Tablet / Mobile
 ========================================================= */
 
