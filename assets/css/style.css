@@ -1143,3 +1143,76 @@ footer {
         padding: 16px 18px;
     }
 }
+
+
+/* =========================================================
+   Search Destination Highlighting
+========================================================= */
+
+.search-highlight {
+    padding: 0 2px;
+
+    color: #222;
+    background: #ffe58a;
+
+    border-radius: 2px;
+}
+
+
+/* Slight flash around the section reached from search */
+
+.search-target {
+    animation:
+        search-target-flash 2s ease;
+}
+
+
+@keyframes search-target-flash {
+
+    0% {
+        background:
+            rgba(255, 229, 138, 0.28);
+    }
+
+    100% {
+        background:
+            transparent;
+    }
+}
+
+
+/* =========================================================
+   Dark Mode Search Highlight
+========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+    .search-highlight {
+        color: #111;
+        background: #f4d35e;
+    }
+}
+
+
+html[data-theme="dark"]
+.search-highlight {
+    color: #111;
+    background: #f4d35e;
+}
+
+
+html[data-theme="light"]
+.search-highlight {
+    color: #222;
+    background: #ffe58a;
+}
+
+
+/* =========================================================
+   Scroll Position
+========================================================= */
+
+section,
+.research-project {
+    scroll-margin-top: 90px;
+}
