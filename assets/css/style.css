@@ -33,49 +33,6 @@ body {
     margin: 0 auto;
 }
 
-/* 
-/* =========================================================
-   Header
-========================================================= */
-
-header {
-    background: #fff;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.nav-container {
-    min-height: 74px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.site-name a {
-    color: #111;
-    text-decoration: none;
-
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-
-nav {
-    display: flex;
-    gap: 26px;
-}
-
-nav a {
-    color: #333;
-    text-decoration: none;
-
-    font-size: 0.95rem;
-}
-
-nav a:hover {
-    color: #0066cc;
-}
- */
-
 
 /* =========================================================
    Hero Header / Banner
@@ -89,19 +46,16 @@ nav a:hover {
 
     background-image: url("../images/banner_cropped.jpg");
     background-size: cover;
-    background-position: center;
+    background-position: center 48%;
 
     overflow: hidden;
 }
-
-
-/* Dark overlay */
 
 .hero-overlay {
     position: absolute;
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.52);
+    background: rgba(0, 0, 0, 0.46);
 }
 
 
@@ -148,7 +102,7 @@ nav a:hover {
 }
 
 .top-nav nav a:hover {
-    opacity: 0.75;
+    opacity: 0.78;
 }
 
 
@@ -181,9 +135,6 @@ nav a:hover {
     letter-spacing: -1px;
 }
 
-
-/* Small underline */
-
 .banner-line {
     width: 80px;
     height: 5px;
@@ -192,6 +143,7 @@ nav a:hover {
 
     background: #62b5e5;
 }
+
 
 /* =========================================================
    General Links
@@ -248,6 +200,7 @@ h3 {
 
 .hero {
     display: grid;
+
     grid-template-columns: 300px 1fr;
 
     gap: 55px;
@@ -285,6 +238,11 @@ h3 {
     line-height: 1.7;
 }
 
+
+/* =========================================================
+   Homepage External Links
+========================================================= */
+
 .links {
     display: flex;
     flex-wrap: wrap;
@@ -318,29 +276,6 @@ h3 {
 .biography p {
     margin-top: 0;
     margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   Homepage External Links
-========================================================= */
-
-.links {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 18px;
-
-    margin-top: 22px;
-}
-
-.links a {
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.links a:hover {
-    text-decoration: underline;
 }
 
 
@@ -549,32 +484,53 @@ footer {
 
 
 /* =========================================================
-   Mobile
+   Tablet / Mobile
 ========================================================= */
 
 @media (max-width: 700px) {
 
-    .nav-container {
+    .hero-header {
+        height: 300px;
+    }
+
+    .top-nav {
         flex-direction: column;
         align-items: flex-start;
 
-        padding: 20px 0;
+        gap: 10px;
 
-        gap: 15px;
+        padding: 16px 20px;
     }
 
-    nav {
+    .top-nav nav {
         flex-wrap: wrap;
 
-        gap: 12px 20px;
+        gap: 10px 16px;
+    }
+
+    .banner-title h1 {
+        font-size: 2.2rem;
+    }
+
+    .banner-line {
+        width: 65px;
+        height: 4px;
     }
 
     .hero {
         grid-template-columns: 1fr;
+
+        gap: 28px;
+
+        align-items: start;
     }
 
     .hero-photo {
-        max-width: 260px;
+        max-width: 280px;
+    }
+
+    .hero-summary h1 {
+        margin-bottom: 15px;
     }
 
     h1 {
@@ -608,36 +564,50 @@ footer {
     }
 }
 
-/* /* =========================================================
-   Site Banner
-========================================================= */
-
-.site-banner {
-    width: 100%;
-    overflow: hidden;
-}
-
-.site-banner img {
-    display: block;
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    object-position: center;
-} */
-
 
 /* =========================================================
    Small Mobile Screens
 ========================================================= */
 
-/* @media (max-width: 480px) {
+@media (max-width: 480px) {
 
     .container {
         width: 92%;
     }
 
-    .site-banner img {
-        height: 160px;
+    .hero-header {
+        height: 260px;
+    }
+
+    .top-nav {
+        padding: 14px 16px;
+    }
+
+    .top-nav .site-name a {
+        font-size: 0.95rem;
+    }
+
+    .top-nav nav {
+        gap: 8px 12px;
+    }
+
+    .top-nav nav a {
+        font-size: 0.84rem;
+    }
+
+    .banner-title {
+        top: 58%;
+    }
+
+    .banner-title h1 {
+        font-size: 1.9rem;
+    }
+
+    .banner-line {
+        width: 55px;
+        height: 4px;
+
+        margin-top: 14px;
     }
 
     main {
@@ -656,18 +626,20 @@ footer {
         font-size: 1.35rem;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        gap: 28px;
-        align-items: start;
-    }
-
     .hero-photo {
-        max-width: 300px;
+        max-width: 260px;
     }
 
-    .hero-summary h1 {
-        margin-bottom: 15px;
+    .position {
+        font-size: 1.12rem;
+    }
+
+    .affiliation {
+        font-size: 1rem;
+    }
+
+    .links {
+        gap: 14px;
     }
 
     .notice {
@@ -676,36 +648,5 @@ footer {
 
     .project-heading h3 {
         font-size: 1.08rem;
-    }
-} */
-
-@media (max-width: 700px) {
-
-    .hero-header {
-        height: 300px;
-    }
-
-    .top-nav {
-        flex-direction: column;
-        align-items: flex-start;
-
-        gap: 10px;
-
-        padding: 16px 20px;
-    }
-
-    .top-nav nav {
-        flex-wrap: wrap;
-
-        gap: 10px 16px;
-    }
-
-    .banner-title h1 {
-        font-size: 2.2rem;
-    }
-
-    .banner-line {
-        width: 65px;
-        height: 4px;
     }
 }
