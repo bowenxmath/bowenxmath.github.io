@@ -14,113 +14,121 @@
 </head>
 
 
-<!-- =========================================================
-     Search
-========================================================= -->
-
-<div
-    class="search-overlay"
-    id="search-overlay"
-    aria-hidden="true">
-
-    <div
-        class="search-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Search website">
-
-        <div class="search-header">
-
-            <input
-                class="search-input"
-                id="search-input"
-                type="search"
-                placeholder="Search..."
-                autocomplete="off"
-                aria-label="Search website">
-
-            <button
-                class="search-close"
-                id="search-close"
-                type="button"
-                aria-label="Close search">
-                &times;
-            </button>
-
-        </div>
-
-        <div
-            class="search-results"
-            id="search-results">
-
-            <p class="search-message">
-                Type to search the website.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/search.js"></script>
-
-    
-
 <body>
 
+
+<!-- =========================================================
+     Header
+========================================================= -->
+
 <header>
+
     <div class="container nav-container">
 
         <div class="site-name">
             <a href="index.html">Bowen Xie</a>
         </div>
 
+
         <nav>
-        
+
             <a href="index.html">Home</a>
+
             <a href="research.html">Research</a>
+
             <a href="teaching.html">Teaching</a>
+
             <a href="education.html">Education</a>
-        
+
             <a href="assets/files/Bowen_Xie_CV.pdf"
                target="_blank"
                rel="noopener noreferrer">
                 CV
             </a>
-        
+
+
+            <!-- Search Button -->
+
             <button
                 class="nav-icon-button"
                 id="search-toggle"
                 type="button"
                 aria-label="Search"
                 title="Search">
-                🔍
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="6">
+                    </circle>
+
+                    <line
+                        x1="16"
+                        y1="16"
+                        x2="21"
+                        y2="21">
+                    </line>
+
+                </svg>
+
             </button>
-        
+
+
+            <!-- Theme Button -->
+
             <button
                 class="nav-icon-button"
                 id="theme-toggle"
                 type="button"
                 aria-label="Toggle theme"
                 title="Toggle theme">
-                ☾
+
+                <svg
+                    id="theme-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        id="theme-icon-path"
+                        d="M20 15.5A8 8 0 0 1 8.5 4
+                           8 8 0 1 0 20 15.5Z">
+                    </path>
+
+                </svg>
+
             </button>
-        
+
         </nav>
+
     </div>
+
 </header>
 
 
+
+<!-- =========================================================
+     Main
+========================================================= -->
+
 <main class="container">
+
+
+    <!-- =====================================================
+         Profile
+    ====================================================== -->
 
     <section class="hero">
 
         <div class="hero-photo">
-            <img src="assets/images/profile.jpg"
-                 alt="Bowen Xie">
+
+            <img
+                src="assets/images/profile.jpg"
+                alt="Bowen Xie">
+
         </div>
 
 
@@ -128,40 +136,53 @@
 
             <h1>Bowen Xie</h1>
 
+
             <p class="position">
                 Tenure-Track Assistant Professor
             </p>
 
+
             <p class="affiliation">
+
                 Department of Mathematics<br>
+
                 College of Engineering and Polymer Science<br>
+
                 The University of Akron
 
-                <a href="https://www.uakron.edu/math/our-people/profile.dot?u=bxie"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="directory-link">
+                <a
+                    href="https://www.uakron.edu/math/our-people/profile.dot?u=bxie"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="directory-link">
                     [Directory]
                 </a>
+
             </p>
+
 
             <div class="links">
 
-                <a href="https://scholar.google.com/citations?user=aUxJtqoAAAAJ&hl=en"
-                   target="_blank"
-                   rel="noopener noreferrer">
+                <a
+                    href="https://scholar.google.com/citations?user=aUxJtqoAAAAJ&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     Google Scholar
                 </a>
 
-                <a href="https://www.linkedin.com/in/bowen-xie-4a48b719b/"
-                   target="_blank"
-                   rel="noopener noreferrer">
+
+                <a
+                    href="https://www.linkedin.com/in/bowen-xie-4a48b719b/"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     LinkedIn
                 </a>
 
-                <a href="assets/files/Bowen_Xie_CV.pdf"
-                   target="_blank"
-                   rel="noopener noreferrer">
+
+                <a
+                    href="assets/files/Bowen_Xie_CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     Curriculum Vitae
                 </a>
 
@@ -171,6 +192,11 @@
 
     </section>
 
+
+
+    <!-- =====================================================
+         Biography
+    ====================================================== -->
 
     <section class="biography">
 
@@ -183,40 +209,54 @@
             (UA).
         </p>
 
+
         <p>
             Before joining UA, he spent two years as a Postdoctoral Lecturer
             in the Department of Statistics and Data Science at
             Washington University in St. Louis (WashU).
+
             During his time at WashU, he worked primarily on
             <strong><em>market-making problems</em></strong>,
             particularly the
             <strong><em>dynamics of the limit order book (LOB)</em></strong>,
             with his mentor
-            <a href="https://artsci.washu.edu/faculty-staff/jos%C3%A9-e-figueroa-l%C3%B3pez"
-               target="_blank"
-               rel="noopener noreferrer">
+
+            <a
+                href="https://artsci.washu.edu/faculty-staff/jos%C3%A9-e-figueroa-l%C3%B3pez"
+                target="_blank"
+                rel="noopener noreferrer">
                 Dr. José E. Figueroa-López
             </a>.
         </p>
 
+
         <p>
             He earned his Ph.D. in Mathematics from Iowa State University
             (ISU) in 2022, where he was advised by
-            <a href="https://math.iastate.edu/directory/ananda-weerasinghe/"
-               target="_blank"
-               rel="noopener noreferrer">
+
+            <a
+                href="https://math.iastate.edu/directory/ananda-weerasinghe/"
+                target="_blank"
+                rel="noopener noreferrer">
                 Dr. Ananda Weerasinghe
             </a>
+
             and conducted research in
             <strong><em>queueing theory</em></strong>
             and
             <strong><em>stochastic control</em></strong>.
+
             He also holds a Master of Science degree in Applied Mathematics
             from Iowa State University.
         </p>
 
     </section>
 
+
+
+    <!-- =====================================================
+         Prospective Students
+    ====================================================== -->
 
     <section class="notice">
 
@@ -233,20 +273,34 @@
     </section>
 
 
+
+    <!-- =====================================================
+         Research Interests
+    ====================================================== -->
+
     <section>
 
         <h2>Research Interests</h2>
 
+
         <div class="interests">
 
             <span>Applied Probability</span>
+
             <span>Queueing Theory</span>
+
             <span>Stochastic Control</span>
+
             <span>Stochastic Networks</span>
+
             <span>Operations Research</span>
+
             <span>Optimization</span>
+
             <span>Mathematical Finance</span>
+
             <span>Machine Learning</span>
+
             <span>Reinforcement Learning</span>
 
         </div>
@@ -254,42 +308,169 @@
     </section>
 
 
+
+    <!-- =====================================================
+         Contact
+    ====================================================== -->
+
     <section>
 
         <h2>Contact</h2>
+
 
         <p>
             <strong>Email:</strong>
             bxie [at] uakron [dot] edu
         </p>
 
+
         <p>
             <strong>Office:</strong>
             CAS 266
         </p>
 
+
         <p>
             <strong>Mailing Address:</strong><br>
+
             Department of Mathematics<br>
+
             College of Engineering and Polymer Science<br>
+
             The University of Akron<br>
+
             Akron, OH 44325-4002
         </p>
 
     </section>
 
+
 </main>
 
+
+
+<!-- =========================================================
+     Footer
+========================================================= -->
 
 <footer>
 
     <div class="container">
-        &copy; 2026 Bowen Xie &middot;
-        Department of Mathematics &middot;
+
+        &copy; 2026 Bowen Xie
+        &middot;
+        Department of Mathematics
+        &middot;
         The University of Akron
+
     </div>
 
 </footer>
+
+
+
+<!-- =========================================================
+     Search Overlay
+========================================================= -->
+
+<div
+    class="search-overlay"
+    id="search-overlay"
+    aria-hidden="true">
+
+    <div
+        class="search-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search website">
+
+
+        <div class="search-header">
+
+
+            <!-- Search icon inside search box -->
+
+            <svg
+                class="search-input-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true">
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6">
+                </circle>
+
+                <line
+                    x1="16"
+                    y1="16"
+                    x2="21"
+                    y2="21">
+                </line>
+
+            </svg>
+
+
+            <input
+                class="search-input"
+                id="search-input"
+                type="search"
+                placeholder="Search..."
+                autocomplete="off"
+                aria-label="Search website">
+
+
+            <!-- Close Search -->
+
+            <button
+                class="search-close"
+                id="search-close"
+                type="button"
+                aria-label="Close search">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <line
+                        x1="6"
+                        y1="6"
+                        x2="18"
+                        y2="18">
+                    </line>
+
+                    <line
+                        x1="18"
+                        y1="6"
+                        x2="6"
+                        y2="18">
+                    </line>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="search-results"
+            id="search-results">
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JavaScript
+========================================================= -->
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/search.js"></script>
 
 
 </body>
