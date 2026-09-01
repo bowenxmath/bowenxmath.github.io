@@ -1,7 +1,3 @@
-/* =========================================================
-   Simple Site Search
-========================================================= */
-
 (function () {
 
     const searchToggle =
@@ -31,10 +27,6 @@
     }
 
 
-    /* -----------------------------------------------------
-       Pages to Search
-    ----------------------------------------------------- */
-
     const pages = [
         {
             url: "index.html",
@@ -58,9 +50,12 @@
     let searchIndex = [];
 
 
-    /* -----------------------------------------------------
-       Build Search Index
-    ----------------------------------------------------- */
+    function cleanText(text) {
+        return text
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
 
     async function buildSearchIndex() {
 
@@ -70,160 +65,137 @@
 
         const entries = [];
 
+
         for (const page of pages) {
 
             try {
 
-                const response =
-                    await fetch(page.url);
+                const response = await fetch(page.url);
 
                 if (!response.ok) {
                     continue;
                 }
 
-                const html =
-                    await response.text();
+                const html = await response.text();
 
-                const parser =
-                    new DOMParser();
+                const parser = new DOMParser();
 
-                const doc =
-                    parser.parseFromString(
-                        html,
-                        "text/html"
-                    );
+                const doc = parser.parseFromString(
+                    html,
+                    "text/html"
+                );
 
-
-                const main =
-                    doc.querySelector("main");
+                const main = doc.querySelector("main");
 
                 if (!main) {
                     continue;
                 }
 
 
+                /*
+                 * Add individual sections.
+                 */
+
                 const sections =
-                    main.querySelectorAll(
-                        "h1, h2, h3"
-                    );
+                    main.querySelectorAll("section");
 
 
-                sections.forEach(
-                    function (heading, index) {
+                sections.forEach(function (section) {
 
-                        let text = "";
+                    const heading =
+                        section.querySelector(
+                            ":scope > h1, :scope > h2, :scope > h3"
+                        );
 
-                        let node =
-                            heading.nextElementSibling;
+                    const title = heading
+                        ? cleanText(heading.textContent)
+                        : page.name;
 
-                        while (
-                            node &&
-                            !/^H[1-3]$/.test(node.tagName)
-                        ) {
+                    const text =
+                        cleanText(section.textContent);
 
-                            text +=
-                                " " +
-                                node.textContent;
-
-                            node =
-                                node.nextElementSibling;
-                        }
-
-
-                        const title =
-                            heading.textContent
-                                .replace(/\s+/g, " ")
-                                .trim();
-
-
-                        const cleanText =
-                            text
-                                .replace(/\s+/g, " ")
-                                .trim();
-
-
-                        let id =
-                            heading.id;
-
-                        if (!id) {
-
-                            id =
-                                "search-heading-" +
-                                index;
-                        }
-
-
-                        entries.push({
-                            page: page.name,
-                            url: page.url,
-                            title: title,
-                            text: cleanText
-                        });
-
+                    if (!text) {
+                        return;
                     }
-                );
+
+                    entries.push({
+                        page: page.name,
+                        url: page.url,
+                        title: title,
+                        text: text
+                    });
+                });
 
 
                 /*
-                 * Also add the entire page so terms inside
-                 * dynamically generated or non-heading
-                 * sections can still be found.
+                 * Add research projects separately.
                  */
 
-                const fullText =
-                    main.textContent
-                        .replace(/\s+/g, " ")
-                        .trim();
+                const projects =
+                    main.querySelectorAll(".research-project");
+
+                projects.forEach(function (project) {
+
+                    const heading =
+                        project.querySelector("h3");
+
+                    const title = heading
+                        ? cleanText(heading.textContent)
+                        : "Research Project";
+
+                    const text =
+                        cleanText(project.textContent);
+
+                    entries.push({
+                        page: page.name,
+                        url: page.url,
+                        title: title,
+                        text: text
+                    });
+                });
+
+
+                /*
+                 * Add whole page as fallback.
+                 */
 
                 entries.push({
                     page: page.name,
                     url: page.url,
                     title: page.name,
-                    text: fullText
+                    text: cleanText(main.textContent)
                 });
 
 
             } catch (error) {
 
                 console.error(
-                    "Could not index:",
+                    "Search indexing failed for",
                     page.url,
                     error
                 );
-
             }
-
         }
+
 
         searchIndex = entries;
     }
 
 
-    /* -----------------------------------------------------
-       Open Search
-    ----------------------------------------------------- */
-
     async function openSearch() {
 
-        searchOverlay.classList.add(
-            "active"
-        );
-
-        document.body.classList.add(
-            "search-open"
-        );
+        searchOverlay.classList.add("active");
 
         searchOverlay.setAttribute(
             "aria-hidden",
             "false"
         );
 
+        document.body.classList.add("search-open");
+
         searchInput.value = "";
 
-        searchResults.innerHTML =
-            '<p class="search-message">' +
-            "Type to search the website." +
-            "</p>";
+        searchResults.innerHTML = "";
 
         searchInput.focus();
 
@@ -231,32 +203,57 @@
     }
 
 
-    /* -----------------------------------------------------
-       Close Search
-    ----------------------------------------------------- */
-
     function closeSearch() {
 
-        searchOverlay.classList.remove(
-            "active"
-        );
-
-        document.body.classList.remove(
-            "search-open"
-        );
+        searchOverlay.classList.remove("active");
 
         searchOverlay.setAttribute(
             "aria-hidden",
             "true"
         );
 
-        searchToggle.focus();
+        document.body.classList.remove("search-open");
+
+        searchInput.value = "";
+
+        searchResults.innerHTML = "";
     }
 
 
-    /* -----------------------------------------------------
-       Search
-    ----------------------------------------------------- */
+    function createSnippet(text, query) {
+
+        const lowerText = text.toLowerCase();
+
+        const position =
+            lowerText.indexOf(query);
+
+        if (position === -1) {
+            return text.slice(0, 180);
+        }
+
+        const start =
+            Math.max(0, position - 70);
+
+        const end =
+            Math.min(
+                text.length,
+                position + query.length + 120
+            );
+
+        let snippet =
+            text.slice(start, end);
+
+        if (start > 0) {
+            snippet = "…" + snippet;
+        }
+
+        if (end < text.length) {
+            snippet += "…";
+        }
+
+        return snippet;
+    }
+
 
     function runSearch() {
 
@@ -266,12 +263,13 @@
                 .trim();
 
 
+        /*
+         * Show nothing until at least two characters.
+         */
+
         if (query.length < 2) {
 
-            searchResults.innerHTML =
-                '<p class="search-message">' +
-                "Type at least two characters." +
-                "</p>";
+            searchResults.innerHTML = "";
 
             return;
         }
@@ -292,145 +290,96 @@
                     );
 
                 })
-                .slice(0, 15);
-
-
-        if (results.length === 0) {
-
-            searchResults.innerHTML =
-                '<p class="search-message">' +
-                "No results found." +
-                "</p>";
-
-            return;
-        }
+                .slice(0, 12);
 
 
         searchResults.innerHTML = "";
 
 
-        results.forEach(
-            function (result) {
+        if (results.length === 0) {
 
-                const link =
-                    document.createElement("a");
+            const message =
+                document.createElement("div");
 
-                link.className =
-                    "search-result";
+            message.className =
+                "search-empty";
 
-                link.href =
-                    result.url;
+            message.textContent =
+                "No results found.";
 
+            searchResults.appendChild(
+                message
+            );
 
-                const title =
-                    document.createElement("span");
-
-                title.className =
-                    "search-result-title";
-
-                title.textContent =
-                    result.title;
+            return;
+        }
 
 
-                const page =
-                    document.createElement("span");
+        results.forEach(function (result) {
 
-                page.className =
-                    "search-result-page";
+            const link =
+                document.createElement("a");
 
-                page.textContent =
-                    result.page;
+            link.className =
+                "search-result";
 
-
-                const snippet =
-                    document.createElement("span");
-
-                snippet.className =
-                    "search-result-text";
+            link.href =
+                result.url;
 
 
-                const lowerText =
-                    result.text.toLowerCase();
+            const title =
+                document.createElement("span");
 
-                const position =
-                    lowerText.indexOf(query);
+            title.className =
+                "search-result-title";
 
-
-                if (position >= 0) {
-
-                    const start =
-                        Math.max(
-                            0,
-                            position - 70
-                        );
-
-                    const end =
-                        Math.min(
-                            result.text.length,
-                            position + 150
-                        );
-
-                    let preview =
-                        result.text.slice(
-                            start,
-                            end
-                        );
-
-                    if (start > 0) {
-                        preview =
-                            "…" + preview;
-                    }
-
-                    if (
-                        end <
-                        result.text.length
-                    ) {
-                        preview += "…";
-                    }
-
-                    snippet.textContent =
-                        preview;
-
-                } else {
-
-                    snippet.textContent =
-                        result.text.slice(
-                            0,
-                            180
-                        );
-
-                }
+            title.textContent =
+                result.title;
 
 
-                link.appendChild(title);
-                link.appendChild(page);
+            const page =
+                document.createElement("span");
 
-                if (snippet.textContent) {
-                    link.appendChild(snippet);
-                }
+            page.className =
+                "search-result-page";
 
-                searchResults.appendChild(
-                    link
+            page.textContent =
+                result.page;
+
+
+            const snippet =
+                document.createElement("span");
+
+            snippet.className =
+                "search-result-text";
+
+            snippet.textContent =
+                createSnippet(
+                    result.text,
+                    query
                 );
 
-            }
-        );
+
+            link.appendChild(title);
+            link.appendChild(page);
+            link.appendChild(snippet);
+
+            searchResults.appendChild(link);
+        });
     }
 
-
-    /* -----------------------------------------------------
-       Events
-    ----------------------------------------------------- */
 
     searchToggle.addEventListener(
         "click",
         openSearch
     );
 
+
     searchClose.addEventListener(
         "click",
         closeSearch
     );
+
 
     searchInput.addEventListener(
         "input",
@@ -442,13 +391,9 @@
         "click",
         function (event) {
 
-            if (
-                event.target ===
-                searchOverlay
-            ) {
+            if (event.target === searchOverlay) {
                 closeSearch();
             }
-
         }
     );
 
@@ -459,35 +404,24 @@
 
             if (
                 event.key === "Escape" &&
-                searchOverlay.classList.contains(
-                    "active"
-                )
+                searchOverlay.classList.contains("active")
             ) {
+
                 closeSearch();
             }
 
 
-            /*
-             * Press "/" anywhere to search,
-             * unless typing in an input.
-             */
-
             if (
                 event.key === "/" &&
-                !searchOverlay.classList.contains(
-                    "active"
-                ) &&
-                document.activeElement.tagName
-                    !== "INPUT" &&
-                document.activeElement.tagName
-                    !== "TEXTAREA"
+                !searchOverlay.classList.contains("active") &&
+                document.activeElement.tagName !== "INPUT" &&
+                document.activeElement.tagName !== "TEXTAREA"
             ) {
 
                 event.preventDefault();
 
                 openSearch();
             }
-
         }
     );
 
