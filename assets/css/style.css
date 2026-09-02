@@ -977,12 +977,6 @@ h3 {
 
 .note-viewer {
     padding-bottom: 18px;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.note-viewer:last-child {
-    border-bottom: none;
 }
 
 .note-viewer-header {
